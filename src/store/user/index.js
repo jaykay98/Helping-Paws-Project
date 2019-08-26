@@ -6,7 +6,10 @@ export default {
   },
   mutations: {
     setUser(state, payload) {
-      state.user = payload;
+      state.user = {
+        ...state.user,
+        ...payload
+      };
     }
   },
   actions: {
@@ -82,8 +85,37 @@ export default {
     logout({ commit }) {
       firebase.auth().signOut();
       commit("setUser", null);
-    }
+    },
+    getProfile({ commit }, userId) {
+      const ref = firebase
+        .firestore()
+        .collection("users")
+        .where("id", "==", userId);
+      return ref.get().then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          // doc.data() is never undefined for query doc snapshots
+          commit("setUser", doc.data());
+        });
+      });
+    },
+    updateProfile({ commit }, payload) {
+      // Write to the database
+      return firebase
+        .firestore()
+        .collection("users")
+        .doc(this.getters.user.id)
+        .update(payload)
+        .then(function() {
+          console.log("Document successfully updated!");
+          commit("setUser", payload);
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+    },
   },
+
   getters: {
     user(state) {
       return state.user;
