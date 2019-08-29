@@ -4,7 +4,7 @@ import Vue from "vue";
 import { firestorePlugin } from 'vuefire';
 import "./plugins/bootstrap-vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fas, faCommentDollar } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import App from "./App.vue";
@@ -30,6 +30,7 @@ new Vue({
   render: h => h(App),
   created() {
     firebase.auth().onAuthStateChanged(async user => {
+      console.log("auth check main")
       if (user) {
         await this.$store.dispatch("autoSignIn", user);
       }

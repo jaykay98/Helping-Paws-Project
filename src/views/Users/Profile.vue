@@ -1,144 +1,157 @@
 <template>
-  <div>
-    <b-img center :src="user.avatar" rounded="circle" alt="Center image" />
-    <b-form-file
-      v-model="file"
-      accept=".jpg, .png, .gif"
-      :state="Boolean(file)"
-      placeholder="Choose a file or drop it here..."
-      drop-placeholder="Drop file here..."
-      @change="onFileSelected"
-    />
-
-    <div @click="editClick">
-      <fa-icon id="edit" :icon="['fas', 'edit']" size="2x" pull="right" />
+  <div >
+    <div v-if="pets">
+      <router-view></router-view>
     </div>
-    <h1 align="center">
-      {{ `${first_name} ${last_name}` }}
-    </h1>
-    <b-card :key="componentKey" bg-variant="light">
+    <div v-else>
+      <b-img center :src="user.avatar" rounded="circle" alt="Center image" />
+      <b-form-file
+        v-model="file"
+        accept=".jpg, .png, .gif"
+        :state="Boolean(file)"
+        placeholder="Choose a file or drop it here..."
+        drop-placeholder="Drop file here..."
+        @change="onFileSelected"
+      />
+
+      <div @click="editClick">
+        <fa-icon id="edit" :icon="['fas', 'edit']" size="2x" pull="right" />
+      </div>
+      <h1 align="center">
+        {{ `${first_name} ${last_name}` }}
+      </h1>
+      <b-card :key="componentKey" bg-variant="light">
+        <b-form-group
+          label-cols-sm="3"
+          label="Email:"
+          label-align-sm="right"
+          label-for="nested-street"
+        >
+          <b-form-input
+            id="nested-street"
+            v-model="email"
+            :disabled="isDisabled"
+          />
+        </b-form-group>
+
+        <b-form-group
+          label-cols-sm="3"
+          label="First Name:"
+          label-align-sm="right"
+          label-for="nested-state"
+        >
+          <b-form-input
+            id="nested-state"
+            v-model="first_name"
+            :disabled="isDisabled"
+          />
+        </b-form-group>
+
+        <b-form-group
+          label-cols-sm="3"
+          label="Last Name:"
+          label-align-sm="right"
+          label-for="nested-state"
+        >
+          <b-form-input
+            id="nested-state"
+            v-model="last_name"
+            :disabled="isDisabled"
+          />
+        </b-form-group>
+
+        <b-form-group
+          label-cols-sm="3"
+          label="Display Name:"
+          label-align-sm="right"
+          label-for="nested-country"
+        >
+          <b-form-input
+            id="nested-country"
+            v-model="display_name"
+            :disabled="isDisabled"
+          />
+        </b-form-group>
+        <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
       <b-form-group
-        label-cols-sm="3"
-        label="Email:"
-        label-align-sm="right"
-        label-for="nested-street"
-      >
-        <b-form-input
-          id="nested-street"
-          v-model="email"
-          :disabled="isDisabled"
-        />
-      </b-form-group>
+          label-cols-sm="3"
+          label="DOB:"
+          label-align-sm="right"
+          label-for="nested-country"
+        >
+          <b-form-input :disabled=isDisabled v-model="DOB"  id="nested-country"></b-form-input>
+        </b-form-group>
+        -->
 
-      <b-form-group
-        label-cols-sm="3"
-        label="First Name:"
-        label-align-sm="right"
-        label-for="nested-state"
-      >
-        <b-form-input
-          id="nested-state"
-          v-model="first_name"
-          :disabled="isDisabled"
-        />
-      </b-form-group>
-
-      <b-form-group
-        label-cols-sm="3"
-        label="Last Name:"
-        label-align-sm="right"
-        label-for="nested-state"
-      >
-        <b-form-input
-          id="nested-state"
-          v-model="last_name"
-          :disabled="isDisabled"
-        />
-      </b-form-group>
-
-      <b-form-group
-        label-cols-sm="3"
-        label="Display Name:"
-        label-align-sm="right"
-        label-for="nested-country"
-      >
-        <b-form-input
-          id="nested-country"
-          v-model="display_name"
-          :disabled="isDisabled"
-        />
-      </b-form-group>
-      <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
-     <b-form-group
-        label-cols-sm="3"
-        label="DOB:"
-        label-align-sm="right"
-        label-for="nested-country"
-      >
-        <b-form-input :disabled=isDisabled v-model="DOB"  id="nested-country"></b-form-input>
-      </b-form-group>
-       -->
-
-      <b-form-group align="center">
-        <b-button variant="primary" @click="submitForm">
-          Save
-        </b-button>
-      </b-form-group>
-      <b-form-group align="center">
-        <b-button variant="primary" @click="cancel">
-          cancel
-        </b-button>
-      </b-form-group>
-    </b-card>
-
-    <!-- <div @click="imageClick"> -->
-    <h2>Pet Management</h2>
-    <div>
-      <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-        <b-row>
-          <b-col md="6" @click="firstImageClick">
-            <b-card-body title="first dog" />
-            <b-card-img
-              src="https://i.imgur.com/e63PCIO.jpg"
-              class="rounded-0"
-            />
-          </b-col>
-          <b-col md="6" @click="secondImageClick">
-            <b-card-body title="second dog" />
-            <b-card-img
-              src="https://data.whicdn.com/images/315789676/large.jpg"
-              class="rounded-0"
-            />
-          </b-col>
-        </b-row>
+        <b-form-group align="center">
+          <b-button variant="primary" @click="submitForm">
+            Save
+          </b-button>
+        </b-form-group>
+        <b-form-group align="center">
+          <b-button variant="primary" @click="cancel">
+            cancel
+          </b-button>
+        </b-form-group>
       </b-card>
-      <!-- </div> -->
-      <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-        <b-row>
-          <b-col md="6" @click="thirdImageClick">
-            <b-card-body title="third dog" />
-            <b-card-img
-              src="https://i.ytimg.com/vi/CinfuRwQlO0/hqdefault.jpg"
-              class="rounded-0"
-            />
-          </b-col>
-          <b-col md="6" @click="fourthImageClick">
-            <b-card-body title="seal dog" />
-            <b-card-img
-              src="http://66.media.tumblr.com/fc9944b6a7c2a5a8f7e10601cb4438d6/tumblr_msxfpyWTCI1rqy4aeo1_500.gif"
-              class="rounded-0"
-            />
-          </b-col>
-          <b-col md="6">
-            <!-- <b-card-body title="Horizontal Card">
-          <b-card-text>
-            This is a wider card with supporting text as a natural lead-in to additional content.
-            This content is a little bit longer.
-          </b-card-text>
-        </b-card-body> -->
-          </b-col>
-        </b-row>
-      </b-card>
+
+      <!-- <div @click="imageClick"> -->
+      <h2 align="center">Pet Management</h2>
+      <div align="center">
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row>
+            <b-col md="6">
+              <b-card-body title="first dog" />
+              <div @click="petLink" >
+                <b-card-img
+                  src="https://i.imgur.com/e63PCIO.jpg"
+                  class="rounded-0"
+                />
+              </div>
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="second dog" />
+              <div @click="secondImageClick">
+                <b-card-img
+                  src="https://data.whicdn.com/images/315789676/large.jpg"
+                  class="rounded-0"
+                />
+              </div>
+            </b-col>
+          </b-row>
+        </b-card>
+        <!-- </div> -->
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row>
+            <b-col md="6">
+              <b-card-body title="third dog" />
+              <div @click="thirdImageClick">
+                <b-card-img
+                  src="https://i.ytimg.com/vi/CinfuRwQlO0/hqdefault.jpg"
+                  class="rounded-0"
+                />
+              </div>
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="seal dog" />
+              <div @click="fourthImageClick">
+                <b-card-img
+                  src="http://66.media.tumblr.com/fc9944b6a7c2a5a8f7e10601cb4438d6/tumblr_msxfpyWTCI1rqy4aeo1_500.gif"
+                  class="rounded-0"
+                />
+              </div>
+            </b-col>
+            <b-col md="6">
+              <!-- <b-card-body title="Horizontal Card">
+            <b-card-text>
+              This is a wider card with supporting text as a natural lead-in to additional content.
+              This content is a little bit longer.
+            </b-card-text>
+          </b-card-body> -->
+            </b-col>
+          </b-row>
+        </b-card>
+      </div>
     </div>
   </div>
 </template>
@@ -154,7 +167,7 @@ export default {
       componentKey: 0,
       //local files to update profile picture with
       file: null,
-
+      pets: false,
       editedUser: {
         email: "",
         first_name: "",
@@ -170,10 +183,20 @@ export default {
       if (user) {
         this.getProfile(user.uid)
         console.log("this is user id in profile page", user.uid);
+        console.log("this is user details in profile page", user);
       }
     });
   },
   methods: {
+    changePetVal () {
+      this.pets="pet"
+      console.log(this.pets)
+    },
+
+     petLink() {
+       this.$router.push("/users/profile/pets");
+      },
+
   ...mapActions(["getProfile","updateProfile"]),
 
     cloneUserFields(){
@@ -282,7 +305,24 @@ export default {
         this.editedUser.DOB = DOB;
       }
     }
-  }
+  },
+  beforeRouteEnter(to, from, next) {
+    // called before the route that renders this component is confirmed.
+    // does NOT have access to `this` component instance,
+    // because it has not been created yet when this guard is called!
+    console.log('beforeRouteUpdate', to.name)
+    next(vm => {
+      // if (to.name === 'pets') is true
+      // then set this.pets = true
+      vm.pets = to.name === 'pets';
+    })
+  },
+  beforeRouteUpdate(to, from, next) {
+    // if (to.name === 'pets') is true
+    // then set this.pets = true
+    this.pets = to.name === 'pets';
+    next();
+}
 };
 </script>
 <style>
