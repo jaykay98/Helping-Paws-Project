@@ -32,7 +32,7 @@ new Vue({
     firebase.auth().onAuthStateChanged(async user => {
       console.log("auth check main")
       if (user) {
-        await this.$store.dispatch("autoSignIn", user);
+        // await this.$store.dispatch("autoSignIn", user);
       }
     });
   }

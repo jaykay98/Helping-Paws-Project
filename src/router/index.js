@@ -207,9 +207,9 @@ export default new Router({
       beforeEnter: AuthGuard,
       children: [
         {
-          path: "pets",
+          path: "pets/:id",
           name: "pets",
-          component: Pets
+          component: Pets,
         },
         {
           path: "details",

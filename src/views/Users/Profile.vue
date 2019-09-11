@@ -1,10 +1,11 @@
 <template>
-  <div >
+  <div>
     <div v-if="pets">
       <router-view></router-view>
-    </div>
+    </div >
     <div v-else>
-      <b-img center :src="user.avatar" rounded="circle" alt="Center image" />
+      <div width="100px" height="100px">
+      <b-img center :src="user.avatar"  rounded="circle"  fluid-grow alt="Fluid-grow image" />
       <b-form-file
         v-model="file"
         accept=".jpg, .png, .gif"
@@ -13,7 +14,7 @@
         drop-placeholder="Drop file here..."
         @change="onFileSelected"
       />
-
+       </div>
       <div @click="editClick">
         <fa-icon id="edit" :icon="['fas', 'edit']" size="2x" pull="right" />
       </div>
@@ -97,60 +98,91 @@
 
       <!-- <div @click="imageClick"> -->
       <h2 align="center">Pet Management</h2>
+     
       <div align="center">
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row>
-            <b-col md="6">
-              <b-card-body title="first dog" />
-              <div @click="petLink" >
-                <b-card-img
-                  src="https://i.imgur.com/e63PCIO.jpg"
-                  class="rounded-0"
-                />
-              </div>
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="second dog" />
-              <div @click="secondImageClick">
-                <b-card-img
-                  src="https://data.whicdn.com/images/315789676/large.jpg"
-                  class="rounded-0"
-                />
-              </div>
-            </b-col>
-          </b-row>
-        </b-card>
-        <!-- </div> -->
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row>
-            <b-col md="6">
-              <b-card-body title="third dog" />
-              <div @click="thirdImageClick">
-                <b-card-img
-                  src="https://i.ytimg.com/vi/CinfuRwQlO0/hqdefault.jpg"
-                  class="rounded-0"
-                />
-              </div>
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="seal dog" />
-              <div @click="fourthImageClick">
-                <b-card-img
-                  src="http://66.media.tumblr.com/fc9944b6a7c2a5a8f7e10601cb4438d6/tumblr_msxfpyWTCI1rqy4aeo1_500.gif"
-                  class="rounded-0"
-                />
-              </div>
-            </b-col>
-            <b-col md="6">
-              <!-- <b-card-body title="Horizontal Card">
-            <b-card-text>
-              This is a wider card with supporting text as a natural lead-in to additional content.
-              This content is a little bit longer.
-            </b-card-text>
-          </b-card-body> -->
-            </b-col>
-          </b-row>
-        </b-card>
+        <b-button v-b-modal.modal-prevent-closing>Add Pet</b-button>
+
+        <b-modal
+          id="modal-prevent-closing"
+          ref="modal"
+          title="Create a Profile for your Pet"
+          @show="resetModal"
+          @hidden="resetModal"
+          @ok="submitFormPet"
+        >
+          <form ref="form" @submit.stop.prevent="handleSubmit">
+            <b-form-group
+              :state="nameState"
+              label="Age"
+              label-for="age-input"
+              invalid-feedback="Age is required"
+            >
+              <b-form-input
+                id="age-input"
+                v-model="addedPet.age"
+                :state="ageState"
+                required
+              ></b-form-input>
+            </b-form-group>
+             <b-form-group
+              :state="colourState"
+              label="Colour"
+              label-for="colour-input"
+              invalid-feedback="Colour is required"
+            >
+              <b-form-input
+                id="colour-input"
+                v-model="addedPet.colour"
+                :state="colourState"
+                required
+              ></b-form-input>
+            </b-form-group>
+             <b-form-group
+              :state="genderState"
+              label="Gender"
+              label-for="gender-input"
+              invalid-feedback="Gender is required"
+            >
+              <b-form-input
+                id="gender-input"
+                v-model="addedPet.gender"
+                :state="genderState"
+                required
+              ></b-form-input>
+            </b-form-group>
+             <b-form-group
+              :state="nameState"
+              label="Name"
+              label-for="name-input"
+              invalid-feedback="Name is required"
+            >
+              <b-form-input
+                id="name-input"
+                v-model="addedPet.name"
+                :state="nameState"
+                required
+              ></b-form-input>
+            </b-form-group>
+          </form>
+        </b-modal>
+        </div>
+      <div v-for="prop in petsArr" :key="prop.id">
+        <div align="center">
+          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-row>
+              <b-col md="6" @click="petLink(prop.id)">
+                <b-card-body :title="prop.name"/>
+                <div>
+                  <b-card-img
+                    :src="prop.avatar"
+                    class="rounded-0"
+                  />
+                </div>
+              </b-col>
+            </b-row>
+          </b-card>
+          <b-button variant="primary" @click="deletePet(prop.id)">Delete Pet</b-button>
+        </div>
       </div>
     </div>
   </div>
@@ -159,9 +191,23 @@
 <script>
 import * as firebase from "firebase";
 import { mapGetters, mapActions } from "vuex";
+const uuidv4 = require('uuid/v4');
 export default {
   data() {
     return {
+      //added pet properties, used to update database and store
+       addedPet: {
+        age: '',
+        colour: '',
+        gender: '',
+        name: '',
+      },
+      //states of added pet for popup form only
+      ageState: null,
+      colourState: null,
+      genderState: null,
+      nameState: null,
+      submittedNames: [],
       isDisabled: true,
       //used for re-rendering card and inputs
       componentKey: 0,
@@ -175,7 +221,8 @@ export default {
         display_name: "",
         DOB: "",
         avatar: ""
-      }
+      },
+      
     };
   },
   mounted: function() {
@@ -184,21 +231,106 @@ export default {
         this.getProfile(user.uid)
         console.log("this is user id in profile page", user.uid);
         console.log("this is user details in profile page", user);
+        console.log("uuid ", uuidv4())
       }
     });
   },
   methods: {
-    changePetVal () {
-      this.pets="pet"
-      console.log(this.pets)
-    },
-
-     petLink() {
-       this.$router.push("/users/profile/pets");
+    //checking popup form validity of fields 
+    checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.ageState = valid ? 'valid' : 'invalid'
+        this.colourState = valid ? 'valid' : 'invalid'
+        this.genderState = valid ? 'valid' : 'invalid'
+        this.nameState = valid ? 'valid' : 'invalid'
+        return valid
+      },
+      resetModal() {
+        this.addedPet.age = ''
+        this.ageState = null
+        this.addedPet.colour = ''
+        this.colourState = null
+        this.addedPet.gender = ''
+        this.genderState = null
+        this.addedPet.name = ''
+        this.nameState = null
+      },
+      handleOk(bvModalEvt) {
+        // Prevent modal from closing
+        bvModalEvt.preventDefault()
+        // Trigger submit handler
+        this.handleSubmit()
+      },
+      handleSubmit() {
+        // Exit when the form isn't valid
+        if (!this.checkFormValidity()) {
+          return
+        }
+        // Push the name to submitted names
+        this.submittedNames.push(this.addedPet.age)
+        this.submittedNames.push(this.addedPet.colour)
+        this.submittedNames.push(this.addedPet.gender)
+        this.submittedNames.push(this.addedPet.name)
+        // Hide the modal manually
+        this.$nextTick(() => {
+          this.$refs.modal.hide()
+          })
+        
+      },
+    
+      deletePet(petId){
+        console.log("this is the pet id going to be deleted ", this.user.pets[petId])
+        let petToDelete = this.user.pets[petId]
+        const firebaseObj = {
+          [`pets.${petId}`]: firebase.firestore.FieldValue.delete()
+        }
+        this.updatePets({
+            'firebasePayload': firebaseObj,
+            'storePayload': {}
+        });
+        this.removePet(petId)
+      },
+     
+     petLink(petId) {
+       this.$router.push(`/users/profile/pets/${petId}`);
       },
 
-  ...mapActions(["getProfile","updateProfile"]),
-
+  ...mapActions(["getProfile","updateProfile", "updatePets", "removePet"]),
+      
+      cloneUserFieldsPets(){
+      const clone = { ...this.addedPet };
+          Object.entries(clone).forEach(arr => {
+            if (arr[1] == "") {
+              delete clone[arr[0]];
+            }
+          });
+        return clone
+    },
+    submitFormPet: function() {
+       // Remove keys that were no edited in editedUser (empty strings)
+      const clone = this.cloneUserFieldsPets();
+      let randPetID = uuidv4();
+      let firebaseObj = {};
+          Object.keys(clone).map((key) => {
+            console.log(this.addedPet.age)
+            console.log(this.addedPet.colour)
+            console.log(this.addedPet.gender)
+            console.log(this.addedPet.name)
+            console.log("very cool log")
+            firebaseObj[`pets.${randPetID}.${key}`] = clone[key];
+            console.log(firebaseObj)
+            console.log("clone ",clone)
+            console.log("clone key: ",clone[key])
+          });
+        return this.updatePets({
+          'firebasePayload': firebaseObj,
+          'storePayload': {
+            pets: {
+              [randPetID]: clone
+          }
+        }
+      });
+    },
     cloneUserFields(){
       const clone = { ...this.editedUser };
           Object.entries(clone).forEach(arr => {
@@ -265,9 +397,26 @@ export default {
   },
   computed: {
     ...mapGetters(["user"]),
+    
+    petsArr: function() {
+      if (this.user && this.user.pets) {
+        console.log('this.user', this.user);
+        const result = Object.keys(this.user.pets).map((petId) => {
+          return {
+            ...this.user.pets[petId],
+            id: petId
+          };
+        })
+        console.log('result', result);
+        return result;
+      }
+    },
     email: {
       get() {
-        return this.user.email;
+         if (this.user) {
+          console.log('debug: this.email get called');
+            return this.user.email;
+        }
       },
       set(email) {
         this.editedUser.email = email;
@@ -275,7 +424,9 @@ export default {
     },
     first_name: {
       get() {
-        return this.user.first_name;
+         if (this.user) {
+          return this.user.first_name;
+        }
       },
       set(first_name) {
         this.editedUser.first_name = first_name;
@@ -283,7 +434,9 @@ export default {
     },
     last_name: {
       get() {
-        return this.user.last_name;
+         if (this.user) {
+          return this.user.last_name;
+        }
       },
       set(last_name) {
         this.editedUser.last_name = last_name;
@@ -291,7 +444,10 @@ export default {
     },
     display_name: {
       get() {
-        return this.user.display_name;
+         if (this.user) {
+          return this.user.display_name;
+        }
+        
       },
       set(display_name) {
         this.editedUser.display_name = display_name;
@@ -299,7 +455,10 @@ export default {
     },
     DOB: {
       get() {
-        return this.user.DOB.toDate().toLocaleDateString("en-AU");
+         if (this.user) {
+          return this.user.DOB.toDate().toLocaleDateString("en-AU");
+        }
+        
       },
       set(DOB) {
         this.editedUser.DOB = DOB;

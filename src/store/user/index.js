@@ -1,15 +1,22 @@
 import * as firebase from "firebase";
+// var merge = require('merge-deep');
+const merge = require('deepmerge');
 
 export default {
   state: {
-    user: null
+    user: {}
   },
   mutations: {
     setUser(state, payload) {
-      state.user = {
-        ...state.user,
-        ...payload
-      };
+      console.log('test:', state.user, payload)
+      // Merging the existing use data with the updated use data
+      state.user = merge(state.user, payload);
+    },
+    resetUser(state, payload) {
+      state.user = payload;
+    },
+    removePet(state, payload) {
+      delete state.user.pets[payload]
     }
   },
   actions: {
@@ -84,7 +91,8 @@ export default {
     },
     logout({ commit }) {
       firebase.auth().signOut();
-      commit("setUser", null);
+      console.log('logging out')
+      commit("resetUser", {});
     },
     getProfile({ commit }, userId) {
       const ref = firebase
@@ -95,9 +103,23 @@ export default {
         querySnapshot.forEach(doc => {
           // doc.data() is never undefined for query doc snapshots
           commit("setUser", doc.data());
+          console.log("this is the doc data form getProfile store ", doc.data())
+          console.log('debug: getProfile finished');
         });
       });
     },
+    // getAllUsers() {
+    //   const ref = firebase
+    //     .firestore()
+    //     .collection("users")
+    //   return ref.get().then(querySnapshot => {
+    //     querySnapshot.forEach(doc => {
+    //       // doc.data() is never undefined for query doc snapshots
+    //       console.log("this is the doc data form getAllUsers store ", doc.data().id)
+    //       console.log('debug: getAllUsersfinished');
+    //     });
+    //   });
+    // },
     updateProfile({ commit }, payload) {
       // Write to the database
       return firebase
@@ -106,7 +128,7 @@ export default {
         .doc(this.getters.user.id)
         .update(payload)
         .then(function() {
-          console.log("Document successfully updated!");
+          console.log("Document successfully updated!", payload);
           commit("setUser", payload);
         })
         .catch(function(error) {
@@ -114,7 +136,32 @@ export default {
           console.error("Error updating document: ", error);
         });
     },
+
+    updatePets({ commit }, { firebasePayload, storePayload }) {
+      // Write to the database
+      console.log("firebasepayload: ", firebasePayload)
+      console.log("storepayload:", storePayload)
+      return firebase
+        .firestore()
+        .collection("users")
+        .doc(this.getters.user.id)
+        .update(firebasePayload)
+        .then(function() {
+          console.log("Document successfully updated!", firebasePayload);
+          console.log(storePayload)
+          commit("setUser", storePayload);
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+    },
+    removePet({ commit }, petId) {
+      commit("removePet", petId);
+    }
   },
+
+  
 
   getters: {
     user(state) {
