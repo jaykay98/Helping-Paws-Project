@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
+import Emergency from "../views/Emergency.vue";
 import Register from "../views/Users/Register.vue";
 import Login from "../views/Users/Login.vue";
 import ForgotPassword from '../views/Users/ForgotPassword.vue';
@@ -46,6 +47,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/emergency",
+      name: "emergency",
+      component: Emergency
     },
     {
       path: "/healthcare-services/healthchecks",
@@ -185,6 +191,15 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "../views/Contact.vue")
+    },
+    {
+      path: "/meet-our-team",
+      name: "meet",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ "../views/OurTeam.vue")
     },
     {
       path: "/users/register",

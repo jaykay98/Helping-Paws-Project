@@ -33,7 +33,12 @@
             >{{ item.title }}</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item to="/forms">Forms & Adopting</b-nav-item>
-          <b-nav-item to="/contact-us">Contact Us</b-nav-item>
+         
+          <b-nav-item-dropdown text="About Us">
+            <b-dropdown-item to="/contact-us">Contact Us</b-dropdown-item>
+            <b-dropdown-item to="/meet-our-team">Meet Our Team</b-dropdown-item>
+           </b-nav-item-dropdown>
+          <!-- <b-nav-item to="/contact-us">Contact Us</b-nav-item> -->
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="!isAuthenticated">
@@ -157,10 +162,28 @@ export default {
 <style>
 .navbar-light .navbar-nav .nav-link {
   color: black !important;
+  transition: 0.2s ease all;
+  border-radius:3px;
+  -webkit-transition: background-color ease-out 0.2s;
+  -moz-transition: background-color ease-out 0.2s;
+  -o-transition: background-color ease-out 0.2s;
+  transition: background-color ease-out 0.2s;
+}
+.navbar-light .navbar-nav .dropdown-item {
+  transition: 0.2s ease all;
+  -webkit-transition: background-color ease-out 0.2s;
+  -moz-transition: background-color ease-out 0.2s;
+  -o-transition: background-color ease-out 0.2s;
+  transition: background-color ease-out 0.2s;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-  font-weight:500;
+  background-color: blue !important;
+  color: white !important;
+}
+.navbar-light .navbar-nav .dropdown-item:hover {
+  background-color: blue;
+  color: white;
 }
 
 </style>
