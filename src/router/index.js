@@ -34,6 +34,7 @@ import NutritionalAdvice from '../views/Wellbeing-Services/nutritional-advice.vu
 import DogCare from '../views/Wellbeing-Services/dog-care.vue';
 import CatCare from '../views/Wellbeing-Services/cat-care.vue';
 import FleaControl from '../views/Wellbeing-Services/flea-control.vue';
+import Forms from '../views/Forms.vue';
 import AuthGuard from "./auth-guard";
 import NotFound from "../views/404.vue";
 
@@ -182,6 +183,11 @@ export default new Router({
       path: '/wellbeing-services/flea-control',
       name: 'fleacontrol',
       component: FleaControl
+    },
+    {
+      path: '/forms',
+      name: 'forms',
+      component: Forms
     },
     {
       path: "/contact-us",
