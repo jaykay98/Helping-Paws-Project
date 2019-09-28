@@ -11,186 +11,191 @@
               <div class="fb-profile-block-thumb cover-container"></div>
                 <div class="profile-img">
                   <a href="#">
-                    <img :src="user.avatar"/>    
-                    <!-- binding upload icon to bootstrap form file  -->
-                    <label for='picture' class="upload">
-                      <fa-icon  :icon="['fas', 'upload']" size="2x" pull="right" />
-                    </label>
-                    <!-- hiding form file -->
-                    <b-form-file
-                      style='display: none;'
-                      id="picture"
-                      v-model="file"
-                      accept=".jpg, .png, .gif"
-                      :state="Boolean(file)"
-                      placeholder="Choose a file or drop it here..."
-                      drop-placeholder="Drop file here..."
-                      @change="onFileSelected"
-                    />
+                    <div class="profile-container">
+                      <img class="profile-image" :src="user.avatar"/>    
+                      <div class="profile-overlay">
+                        <div class="profile-text">
+                          upload a photo
+                          <!-- binding upload icon to bootstrap form file  -->
+                          <label for='picture' class="upload">
+                            <fa-icon  :icon="['fas', 'upload']" size="2x"  />
+                          </label>
+                          <!-- hiding form file -->
+                          <b-form-file
+                            style='display: none;'
+                            id="picture"
+                            v-model="file"
+                            accept=".jpg, .png, .gif"
+                            :state="Boolean(file)"
+                            placeholder="Choose a file or drop it here..."
+                            drop-placeholder="Drop file here..."
+                            @change="onFileSelected"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </a>
                 </div>
                 <div class="profile-name">
                   <h2>{{ `${first_name} ${last_name}` }}</h2>
                 </div>
-                 <div class="fb-profile-block-menu">
-                    <div class="block-menu">
-                        <ul>
-                            <li class="profile-details" v-b-modal.modal-prevent-closing-person>Details</li>
-                        </ul>
-                        <div class="mt-3">
-                          Submitted Names:
-                          <div v-if="personSubmittedNames.length === 0">--</div>
-                          <ul v-else class="mb-0 pl-3">
-                            <li v-for="name in personSubmittedNames">{{ name }}</li>
-                          </ul>
-                        </div>
-                        <!-- using b-modal to create popup window with user details that can be edited,
-                        replacing the default ok and cancel button behaviour with some custom behavior -->
-                        <b-modal
-                          id="modal-prevent-closing-person"
-                          ref="modal"
-                          title="Submit Your Name"
-                          @ok="submitForm"
-                          @cancel="cancel"
-                        >
-                          <!-- <div @click="editClick">
-                            <fa-icon id="edit" :icon="['fas', 'edit']" size="2x" pull="right" />
-                          </div> -->
-                          <b-card :key="componentKey" bg-variant="light">
-                            <b-form-group
-                              label-cols-sm="3"
-                              label="Email:"
-                              label-align-sm="right"
-                              label-for="nested-street"
-                            >
-                              <b-form-input
-                                id="nested-street"
-                                v-model="email"
-                              />
-                            </b-form-group>
-
-                            <b-form-group
-                              label-cols-sm="3"
-                              label="First Name:"
-                              label-align-sm="right"
-                              label-for="nested-state"
-                            >
-                              <b-form-input
-                                id="nested-state"
-                                v-model="first_name"
-                              />
-                            </b-form-group>
-
-                            <b-form-group
-                              label-cols-sm="3"
-                              label="Last Name:"
-                              label-align-sm="right"
-                              label-for="nested-state"
-                            >
-                              <b-form-input
-                                id="nested-state"
-                                v-model="last_name"
-                              />
-                            </b-form-group>
-
-                            <b-form-group
-                              label-cols-sm="3"
-                              label="Display Name:"
-                              label-align-sm="right"
-                              label-for="nested-country"
-                            >
-                              <b-form-input
-                                id="nested-country"
-                                v-model="display_name"
-                              />
-                            </b-form-group>
-                            <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
-                          <b-form-group
-                              label-cols-sm="3"
-                              label="DOB:"
-                              label-align-sm="right"
-                              label-for="nested-country"
-                            >
-                              <b-form-input :disabled=isDisabled v-model="DOB"  id="nested-country"></b-form-input>
-                            </b-form-group>
-                            -->
-                          </b-card>
-                        </b-modal>
+                <div class="fb-profile-block-menu">
+                  <div class="block-menu">
+                    <ul>
+                      <li class="profile-details" v-b-modal.modal-prevent-closing-person>Details</li>
+                    </ul>
+                    <div class="mt-3">
+                      Submitted Names:
+                      <div v-if="personSubmittedNames.length === 0">--</div>
+                      <ul v-else class="mb-0 pl-3">
+                        <li v-for="name in personSubmittedNames">{{ name }}</li>
+                      </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    <!-- using b-modal to create popup window with user details that can be edited,
+                    replacing the default ok and cancel button behaviour with some custom behavior -->
+                    <b-modal
+                      id="modal-prevent-closing-person"
+                      ref="modal"
+                      title="Submit Your Name"
+                      @ok="submitForm"
+                      @cancel="cancel"
+                    >
+                      <b-card :key="componentKey" bg-variant="light">
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Email:"
+                          label-align-sm="right"
+                          label-for="nested-street"
+                        >
+                          <b-form-input
+                            id="nested-street"
+                            v-model="email"
+                          />
+                        </b-form-group>
 
-    
-      <h2 align="center">Pet Management</h2>
-      <div align="center">
-        <b-button v-b-modal.modal-prevent-closing>Add Pet</b-button>
-        <b-modal
-          id="modal-prevent-closing"
-          ref="modal"
-          title="Create a Profile for your Pet"
-          @show="resetModalPet"
-          @hidden="resetModalPet"
-          @ok="submitFormPet"
-        >
-          <form ref="form" @submit.stop.prevent="handleSubmitPet">
-            <b-form-group
-              :state="petNameState"
-              label="Age"
-              label-for="age-input"
-              invalid-feedback="Age is required"
-            >
-              <b-form-input
-                id="age-input"
-                v-model="addedPet.age"
-                :state="petAgeState"
-                required
-              ></b-form-input>
-            </b-form-group>
-             <b-form-group
-              :state="petColourState"
-              label="Colour"
-              label-for="colour-input"
-              invalid-feedback="Colour is required"
-            >
-              <b-form-input
-                id="colour-input"
-                v-model="addedPet.colour"
-                :state="petColourState"
-                required
-              ></b-form-input>
-            </b-form-group>
-             <b-form-group
-              :state="petGenderState"
-              label="Gender"
-              label-for="gender-input"
-              invalid-feedback="Gender is required"
-            >
-              <b-form-input
-                id="gender-input"
-                v-model="addedPet.gender"
-                :state="petGenderState"
-                required
-              ></b-form-input>
-            </b-form-group>
-             <b-form-group
-              :state="petNameState"
-              label="Name"
-              label-for="name-input"
-              invalid-feedback="Name is required"
-            >
-              <b-form-input
-                id="name-input"
-                v-model="addedPet.name"
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="First Name:"
+                          label-align-sm="right"
+                          label-for="nested-state"
+                        >
+                          <b-form-input
+                            id="nested-state"
+                            v-model="first_name"
+                          />
+                        </b-form-group>
+
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Last Name:"
+                          label-align-sm="right"
+                          label-for="nested-state"
+                        >
+                          <b-form-input
+                            id="nested-state"
+                            v-model="last_name"
+                          />
+                        </b-form-group>
+
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Display Name:"
+                          label-align-sm="right"
+                          label-for="nested-country"
+                        >
+                          <b-form-input
+                            id="nested-country"
+                            v-model="display_name"
+                          />
+                        </b-form-group>
+                          <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
+                        <b-form-group
+                            label-cols-sm="3"
+                            label="DOB:"
+                            label-align-sm="right"
+                            label-for="nested-country"
+                          >
+                            <b-form-input :disabled=isDisabled v-model="DOB"  id="nested-country"></b-form-input>
+                          </b-form-group>
+                          -->
+                      </b-card>
+                    </b-modal>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pet-management-div" >
+          <h2 class="pet-management-heading" >Pet Management
+            <b-button class= "add-pet" variant="primary" v-b-modal.modal-prevent-closing>Add Pet</b-button>
+          </h2>
+        </div>
+        <div align="center">
+          <b-modal
+            id="modal-prevent-closing"
+            ref="modal"
+            title="Create a Profile for your Pet"
+            @show="resetModalPet"
+            @hidden="resetModalPet"
+            @ok="submitFormPet"
+          >
+            <form ref="form" @submit.stop.prevent="handleSubmitPet">
+              <b-form-group
                 :state="petNameState"
-                required
-              ></b-form-input>
-              
-            </b-form-group>
-          </form>
-        </b-modal>
+                label="Age"
+                label-for="age-input"
+                invalid-feedback="Age is required"
+              >
+                <b-form-input
+                  id="age-input"
+                  v-model="addedPet.age"
+                  :state="petAgeState"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                :state="petColourState"
+                label="Colour"
+                label-for="colour-input"
+                invalid-feedback="Colour is required"
+              >
+                <b-form-input
+                  id="colour-input"
+                  v-model="addedPet.colour"
+                  :state="petColourState"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                :state="petGenderState"
+                label="Gender"
+                label-for="gender-input"
+                invalid-feedback="Gender is required"
+              >
+                <b-form-input
+                  id="gender-input"
+                  v-model="addedPet.gender"
+                  :state="petGenderState"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                :state="petNameState"
+                label="Name"
+                label-for="name-input"
+                invalid-feedback="Name is required"
+              >
+                <b-form-input
+                  id="name-input"
+                  v-model="addedPet.name"
+                  :state="petNameState"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </form>
+          </b-modal>
         </div>
         <!-- <div class="container"> 
           <div class="row">
@@ -226,30 +231,29 @@
             </div>
           </div>
         </div> -->
-      
-      <div v-for="prop in petsArr" :key="prop.id">
-        <div align="center">
-          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-            <b-row>
-              <b-col md="12" @click="petLink(prop.id)">
-                <div class = "pet-card-image">
-                  <b-img 
-                    thumbnail 
-                    fluid
-                    :src="getPetAvatar(prop)"
-                    class="rounded-0"
-                  />
-                  <div  @click="deletePet(prop.id)" >
-                    <fa-icon class = "delete-pet" :icon="['fas', 'trash']" size="2x" pull="right" />
+        <div v-for="prop in petsArr" :key="prop.id">
+          <div align="center">
+            <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+              <b-row>
+                <b-col md="12" @click="petLink(prop.id)">
+                  <div class = "pet-card-image">
+                    <b-img 
+                      thumbnail 
+                      fluid
+                      :src="getPetAvatar(prop)"
+                      class="rounded-0"
+                    />
+                    <div  @click="deletePet(prop.id)" >
+                      <fa-icon class = "delete-pet" :icon="['fas', 'trash']" size="2x" pull="right" />
+                    </div>
                   </div>
-                </div>
-              </b-col>
-            </b-row>
-          </b-card>
+                </b-col>
+              </b-row>
+            </b-card>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -730,6 +734,7 @@ export default {
 }
 .upload:hover {
    cursor: pointer;
+   color: blue
 }
 .profile-details {
   font-weight: bold;
@@ -821,8 +826,71 @@ export default {
     cursor: pointer !important;
     text-decoration: underline;
 }
+
 /* styling for the pet management images  */
 .grid-item-image {
   position: relative;
+}
+
+/* pet management div, heading and add pet button styling */
+.pet-management-div {
+  width: 400px;
+  height: 50px;
+  justify-content: space-between;
+  position: center;
+  margin-right: auto;
+  margin-left: auto;
+   margin-top: 10px;
+}
+/* margin value gives space between heading and button */
+.pet-management-heading {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.add-pet {
+  float: right;
+  margin: 0 10px;
+}
+
+/* profile overlay styling*/
+.profile-container {
+  position: relative;
+  width: 100%;
+}
+
+.profile-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.profile-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.profile-container:hover .profile-overlay {
+  opacity: 1;
+}
+
+.profile-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 </style>
