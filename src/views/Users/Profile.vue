@@ -235,9 +235,10 @@
           <div align="center">
             <b-card no-body class="overflow-hidden" style="max-width: 540px;">
               <b-row>
-                <b-col md="12" @click="petLink(prop.id)">
+                <b-col md="12" >
                   <div class = "pet-card-image">
                     <b-img 
+                      @click="petLink(prop.id)"
                       thumbnail 
                       fluid
                       :src="getPetAvatar(prop)"
