@@ -107,11 +107,6 @@ export default {
       return this.password.length >= 6;
     },
     comparePasswords() {
-      console.log(this.password.length >= 6);
-      console.log(
-        this.password === this.confirmPassword &&
-          this.confirmPassword.length > 0
-      );
       return (
         this.password === this.confirmPassword &&
         this.confirmPassword.length > 0
