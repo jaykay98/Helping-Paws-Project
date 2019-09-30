@@ -134,10 +134,13 @@ export default {
     };
   },
   computed: {
+   //check if user not null, undefined, if it has at least 1 key and if its id
+   //is not null, basically checking if user is logged in or not
     isAuthenticated() {
       return (
-        this.$store.getters.user !== null &&
-        this.$store.getters.user !== undefined
+        this.$store.getters.user && 
+        Object.keys(this.$store.getters.user).length > 0 &&
+        this.$store.getters.user.id !== null
       );
     },
     user() {

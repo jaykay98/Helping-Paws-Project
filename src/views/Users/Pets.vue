@@ -1,97 +1,122 @@
 <template>
   <div >
-    <div>
-      <div width="100px" height="100px" @click="logPets">
-      <b-img center  :src="user.pets[$route.params.id].avatar"  rounded="circle"  fluid-grow alt="Fluid-grow image" />
-      <b-form-file
-        v-model="file"
-        accept=".jpg, .png, .gif"
-        :state="Boolean(file)"
-        placeholder="Choose a file or drop it here..."
-        drop-placeholder="Drop file here..."
-        @change="onFileSelected"
-      />
-       </div>
-      <div @click="editClick">
-        <fa-icon id="edit" :icon="['fas', 'edit']" size="2x" pull="right" />
-      </div>
-      <!-- <h1 align="center">
-        {{ `${name}` }}
-      </h1> -->
-      <b-card :key="componentKey" bg-variant="light">
-        <b-form-group
-          label-cols-sm="3"
-          label="Name:"
-          label-align-sm="right"
-          label-for="nested-street"
-        >
-          <b-form-input
-            id="nested-street"
-            v-model="name"
-            :disabled="isDisabled"
-          />
-        </b-form-group>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="fb-profile-block">
+              <div class="fb-profile-block-thumb cover-container"></div>
+                <div class="profile-img">
+                  <a href="#">
+                    <div class="profile-container">
+                      
+                      <img class="profile-image" :src="user.pets[$route.params.id].avatar" />    
+                      <div class="profile-overlay">
+                        <div class="profile-text">
+                          upload a photo
+                          <!-- binding upload icon to bootstrap form file  -->
+                          <label for='picture' class="upload">
+                            <fa-icon  :icon="['fas', 'upload']" size="2x"  />
+                          </label>
+                          <!-- hiding form file -->
+                          <b-form-file
+                            style='display: none;'
+                            id="picture"
+                            v-model="file"
+                            accept=".jpg, .png, .gif"
+                            :state="Boolean(file)"
+                            placeholder="Choose a file or drop it here..."
+                            drop-placeholder="Drop file here..."
+                            @change="onFileSelected"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="profile-name">
+                  <h2>{{ `${name}` }}</h2>
+                </div>
+                <div class="fb-profile-block-menu">
+                  <div class="block-menu">
+                    <ul>
+                      <li class="profile-details" v-b-modal.modal-prevent-closing-person>Details</li>
+                    </ul>
+                    <!-- using b-modal to create popup window with user details that can be edited,
+                    replacing the default ok and cancel button behaviour with some custom behavior -->
+                    <b-modal
+                      id="modal-prevent-closing-person"
+                      ref="modal"
+                      title="Submit Your Name"
+                      @ok="submitForm"
+                      @cancel="cancel"
+                    >
+                      <b-card :key="componentKey" bg-variant="light">
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Name:"
+                          label-align-sm="right"
+                          label-for="nested-street"
+                        >
+                          <b-form-input
+                            id="nested-street"
+                            v-model="name"
+                          />
+                        </b-form-group>
 
-        <b-form-group
-          label-cols-sm="3"
-          label="Age:"
-          label-align-sm="right"
-          label-for="nested-state"
-        >
-          <b-form-input
-            id="nested-state"
-            v-model="age"
-            :disabled="isDisabled"
-          />
-        </b-form-group>
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Age:"
+                          label-align-sm="right"
+                          label-for="nested-state"
+                        >
+                          <b-form-input
+                            id="nested-state"
+                            v-model="age"
+                          />
+                        </b-form-group>
 
-        <b-form-group
-          label-cols-sm="3"
-          label="Colour:"
-          label-align-sm="right"
-          label-for="nested-state"
-        >
-          <b-form-input
-            id="nested-state"
-            v-model="colour"
-            :disabled="isDisabled"
-          />
-        </b-form-group>
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Colour:"
+                          label-align-sm="right"
+                          label-for="nested-state"
+                        >
+                          <b-form-input
+                            id="nested-state"
+                            v-model="colour"
+                          />
+                        </b-form-group>
 
-        <b-form-group
-          label-cols-sm="3"
-          label="Gender:"
-          label-align-sm="right"
-          label-for="nested-country"
-        >
-          <b-form-input
-            id="nested-country"
-            v-model="gender"
-            :disabled="isDisabled"
-          />
-        </b-form-group>
-        <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
-      <b-form-group
-          label-cols-sm="3"
-          label="DOB:"
-          label-align-sm="right"
-          label-for="nested-country"
-        >
-          <b-form-input :disabled=isDisabled v-model="DOB"  id="nested-country"></b-form-input>
-        </b-form-group>
-        -->
-
-        <b-form-group align="center">
-          <b-button variant="primary" @click="submitForm">
-            Save
-          </b-button>
-        </b-form-group>
-        <b-form-group align="center">
-          <b-button variant="primary" @click="cancel">
-            cancel
-          </b-button>
-        </b-form-group>
-      </b-card>
+                        <b-form-group
+                          label-cols-sm="3"
+                          label="Gender:"
+                          label-align-sm="right"
+                          label-for="nested-country"
+                        >
+                          <b-form-input
+                            id="nested-country"
+                            v-model="gender"
+                          />
+                        </b-form-group>
+                          <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
+                        <b-form-group
+                            label-cols-sm="3"
+                            label="DOB:"
+                            label-align-sm="right"
+                            label-for="nested-country"
+                          >
+                            <b-form-input :disabled=isDisabled v-model="DOB"  id="nested-country"></b-form-input>
+                          </b-form-group>
+                          -->
+                      </b-card>
+                    </b-modal>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div>
 
       <!-- <div @click="imageClick"> -->
         <h1 align="center">Care Milestones</h1>
@@ -467,17 +492,6 @@ export default {
         console.log("this is user details in pet page", user);
       }
     });
-    // this.$root.$on('bv::dropdown::show', bvEvent => {
-    //   console.log('Dropdown is about to be shown', bvEvent)
-    //   const petTypeArr = ["Bearded Dragon" , "Birds", "Burro", "Cats","Chameleons (Veiled)","Chickens", "Chinchillas",
-    //   "Chinese Water Dragon","Cows", "Dogs","Donkey","Ducks","Ferrets","Fish","Geckos","Geese (Chinese Swan Goose)", "Gerbils",
-    //   "Goats","Guinea","Fowl","Guinea Pigs","Hamsters", "Hedgehogs","Horses","Iguanas","Llamas", "Lizards", "Mice",
-    //   "Mule","Peafowl", "Pigs and Hogs", "Pigeons","Ponies", "Pot Bellied Pig", "Rabbits", "Rats", "Sheep", "Skinks", "Snakes",
-    //   "Stick Insects", "Sugar Gliders", "Tarantula", "Turkeys","Turtles"]
-    //   for (let i =0; i<petTypeArr.length; i++) {
-    //     console.log("pet", petTypeArr[i])
-    //   }
-    // })
   },
   
   methods: {
@@ -551,10 +565,18 @@ export default {
       this.isDisabled = true;
       //re-render parent card and all its child inputs
       this.componentKey += 1;
+       this.editedPet = {
+        name: "",
+        age: "",
+        colour: "",
+        gender: "",
+        avatar: ""
+      }
     },
     onFileSelected(event) {
       console.log(event.target.files[0].name);
       this.file = event.target.files[0];
+      this.submitForm();
     },
 
     logPets(){
@@ -667,4 +689,270 @@ export default {
           overflow-y:auto;
        }
     }
+    
+#edit {
+  padding-right: 20px;
+}
+
+.image-container{
+  margin: auto;
+  width: 400px;
+  height: 400px;
+  text-align: center !important;
+}
+.fb-profile-block {
+  margin: auto;
+  position: relative;
+  width: 100%;
+}
+.cover-container{
+    background: #1E90FF;
+    background: -webkit-radial-gradient(bottom, #73D6F5 12%, #1E90FF);
+    background: radial-gradient(at bottom, #73D6F5 12%, #1E90FF)
+}
+.fb-profile-block-thumb{
+  display: block;
+  height: 315px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+}
+.fb-profile-block-menu {
+  border: 1px solid #d3d6db;
+  border-radius: 0 0 3px 3px;
+}
+.profile-img a{
+  bottom: 15px;
+  box-shadow: none;
+	display: block;
+	left: 15px;
+	padding:1px;
+	position: absolute;
+	height: 160px;
+	width: 160px;
+	background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+	z-index:9;
+}
+.profile-img img {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+  height:158px;
+  padding: 5px;
+  width:158px;
+}
+.profile-name {
+  bottom: 60px;
+  left: 200px;
+  position: absolute;
+}
+.profile-name h2 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
+  max-width: 275px;
+  position: relative;
+  text-transform: uppercase;
+}
+.fb-profile-block-menu{
+  height: 44px;
+  position: relative;
+  width:100%;
+  overflow:hidden;
+ }
+.block-menu {
+  clear: right;
+  padding-left: 205px;
+}
+.block-menu ul{
+	margin:0;
+	padding:0;
+}
+.block-menu ul li{
+	display:inline-block;
+}
+.block-menu ul li a {
+  border-right: 1px solid #e9eaed;
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  height: 42px;
+  line-height: 3.0;
+  padding: 0 17px;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  color:#4b4f56;
+  text-transform:capitalize;
+}
+.block-menu ul li:first-child a{
+  border-left: 1px solid #e9eaed;
+}
+
+/* styling of upload icon */
+.upload {
+  width: 100px;
+}
+.upload:hover {
+   cursor: pointer;
+   color: blue
+}
+.profile-details {
+  font-weight: bold;
+}
+.profile-details:hover {
+  cursor: pointer;
+  text-decoration: underline;
+
+}
+
+/* styling for pet carousel */
+.pet-carousel {
+  text-shadow: 1px 1px 2px #333;
+  /* padding-right: 10px; */
+}
+
+/* .pet-carousel text{
+  font-size: 40px;
+} */
+.pet-carousel-slide img {
+  height:50vh
+}
+
+.pet-carousel-profile-link{
+  font-size: 20px;
+}
+.pet-carousel-profile-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* .pet-carousel-slide text {
+  font-size: 20px !important;
+} */
+
+.image-box a {
+  clear: both;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  position: relative;
+  text-align: center;
+}
+.bgbox {
+  background-color: #232323;
+  height: 150px;
+  display:table-cell;
+  vertical-align:middle;
+  padding: 4px;
+  border-radius: 2px;
+  
+}
+.bgbox img {
+   width: 200px;
+   display: block;
+}
+.img-title {
+  bottom: 5px;
+  display: block;
+  text-align: center;
+  color: #999999;
+  padding-top: 5px;
+}
+.img-title:hover {
+  color: #232323; 
+}
+
+.grid-item-image {
+  /* max-width: 300px;
+  max-height: 300px; */
+  height: 200px;
+  width: 200px;
+  padding-bottom: 50px;
+  padding-left:  10px;
+  padding-right: 10px;
+  position: relative;
+}
+/* delete pet styling, used for trashbin icon */
+.delete-pet {
+   display: block;
+   position: absolute;
+   top: 10px;
+   right: 50px;
+   clear:both;
+
+}
+/* delete pet styling, used for trashbin icon */
+.delete-pet:hover {
+    color: blue;
+    cursor: pointer !important;
+    text-decoration: underline;
+}
+
+/* styling for the pet management images  */
+.grid-item-image {
+  position: relative;
+}
+
+/* pet management div, heading and add pet button styling */
+.pet-management-div {
+  width: 400px;
+  height: 50px;
+  justify-content: space-between;
+  position: center;
+  margin-right: auto;
+  margin-left: auto;
+   margin-top: 10px;
+}
+/* margin value gives space between heading and button */
+.pet-management-heading {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.add-pet {
+  float: right;
+  margin: 0 10px;
+}
+
+/* profile overlay styling*/
+.profile-container {
+  position: relative;
+  width: 100%;
+}
+
+.profile-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.profile-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.profile-container:hover .profile-overlay {
+  opacity: 1;
+}
+
+.profile-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
 </style>
