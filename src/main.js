@@ -30,10 +30,11 @@ new Vue({
   render: h => h(App),
   created() {
     firebase.auth().onAuthStateChanged(async user => {
-      console.log("auth check main")
       if (user) {
         // await this.$store.dispatch("autoSignIn", user);
+        this.$store.dispatch("setLocalUser", {id: user.uid});
       }
+      this.$store.dispatch("setLocalUser", {fetched: true});
     });
   }
 }).$mount("#app");

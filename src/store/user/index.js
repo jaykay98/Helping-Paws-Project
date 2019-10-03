@@ -136,7 +136,10 @@ export default {
     },
     removePet({ commit }, petId) {
       commit("removePet", petId);
-    }
+    },
+    setLocalUser ({ commit }, payload) {
+      commit("setUser", payload);
+    },
   },
 
   

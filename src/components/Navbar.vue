@@ -49,12 +49,12 @@
           <!-- <b-nav-item to="/contact-us">Contact Us</b-nav-item> -->
         </b-navbar-nav>
 
-        <b-navbar-nav class="ml-auto" v-if="!isAuthenticated">
+        <b-navbar-nav class="ml-auto" v-if="isAuthenticatedLoginSignup">
           <b-nav-item to="/users/register">Sign Up</b-nav-item>
           <b-nav-item to="/users/login">Login</b-nav-item>
         </b-navbar-nav>
 
-        <b-navbar-nav class="ml-auto" v-if="isAuthenticated">
+        <b-navbar-nav class="ml-auto" v-if="isAuthenticatedMyAccount">
           <b-nav-item-dropdown id="dropdown-left" text="My Account" class="mr-5">
             <b-dropdown-item to="/users/profile">My Profile</b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
@@ -142,13 +142,21 @@ export default {
     };
   },
   computed: {
-   //check if user not null, undefined, if it has at least 1 key and if its id
-   //is not null, basically checking if user is logged in or not
-    isAuthenticated() {
+   //check if user is logged in or not
+    isAuthenticatedLoginSignup() {
       return (
         this.$store.getters.user && 
         Object.keys(this.$store.getters.user).length > 0 &&
-        this.$store.getters.user.id !== null
+        this.$store.getters.user.fetched &&
+        !this.$store.getters.user.id
+      );
+    },
+    isAuthenticatedMyAccount() {
+      return (
+        this.$store.getters.user && 
+        Object.keys(this.$store.getters.user).length > 0 &&
+        this.$store.getters.user.fetched &&
+        this.$store.getters.user.id
       );
     },
     user() {
