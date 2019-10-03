@@ -1,6 +1,14 @@
 <template>
   <div>
-    <b-navbar toggleable="md" variant="light" type="light">
+     <div class="container-fluid" >
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="main-header-title">Helping Paws Vet Clinic</h2>
+                     <h2 class="main-header-pn">Ph: (07) 3297 1005</h2>
+                </div>
+            </div>
+        </div>
+    <b-navbar class="navbar" toggleable="md" type="light">
       <b-navbar-brand href="/">Helping Paws Vet Clinic</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -187,6 +195,27 @@ export default {
 .navbar-light .navbar-nav .dropdown-item:hover {
   background-color: blue;
   color: white;
+}
+.container-fluid {
+  height: 100px;
+  background-color: #1565C0
+}
+.main-header-title {
+  margin-left:8.5%;
+  color: white;
+  /* position: absolute; */
+  /* top: 20px; */
+}
+.main-header-pn {
+  margin-left:8.5%;
+  color: white;
+  /* position: absolute; */
+  /* top: 50px;
+  right: 50px; */
+
+}
+.navbar{
+  background-color: #2962FF
 }
 
 </style>
