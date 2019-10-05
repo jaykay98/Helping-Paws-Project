@@ -82,19 +82,10 @@ export default {
   },
   methods: {
     login() {
-      fb.auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$store.dispatch("signUserIn", {
-            email: this.email,
-            password: this.password
-          });
-        })
-        .catch(error => {
-          this.showError = true;
-          this.errorMsg = error.message;
-          console.log(error);
-        });
+      this.$store.dispatch("signUserIn", {
+        email: this.email,
+        password: this.password
+      });
     },
     onResetPassword() {
       if (this.email === "") {

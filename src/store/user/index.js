@@ -26,13 +26,13 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
-        .then(user => {
+        .then(data => {
           commit("setLoading", false);
           const newUser = {
-            id: user.uid,
-            name: user.displayName,
-            email: user.email,
-            photoUrl: user.photoURL
+            id: data.user.uid,
+            name: data.user.displayName,
+            email: data.user.email,
+            photoUrl: data.user.photoURL
           };
           commit("setUser", newUser);
         })
@@ -138,6 +138,7 @@ export default {
       commit("removePet", petId);
     },
     setLocalUser ({ commit }, payload) {
+      console.log('setLocalUser')
       commit("setUser", payload);
     },
   },

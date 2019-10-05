@@ -108,6 +108,68 @@
                             v-model="display_name"
                           />
                         </b-form-group>
+                         <!--Home Phone -->
+                        <b-form-group 
+                          label-cols-sm="3"
+                          label="Home Phone:"
+                          label-align-sm="right"
+                          label-for="nested-country"
+                        >
+                            <b-form-input
+                            id="input-4"
+                            v-model="homePhone"
+                            type="text"
+                            @change="phoneInputHandler('homePhone', $event)"
+                            :required="homePhoneRequired"
+                            ></b-form-input>
+                        </b-form-group>
+
+                        <!--Mobile Phone -->
+                        <b-form-group 
+                          label-cols-sm="3"
+                          label="Mobile Phone:"
+                          label-align-sm="right"
+                          label-for="nested-country"
+                        >
+                            <b-form-input
+                            id="input-5"
+                            v-model="mobilePhone"
+                            type="text"
+                            @change="phoneInputHandler('mobilePhone', $event)"
+                            :required="mobilePhoneRequired"
+                            ></b-form-input>
+                        </b-form-group>
+
+                        <!--Work Phone -->
+                        <b-form-group 
+                          label-cols-sm="3"
+                          label="Work Phone:"
+                          label-align-sm="right"
+                          label-for="nested-country"
+                        >
+                            <b-form-input
+                            id="input-6"
+                            v-model="workPhone"
+                            type="text"
+                            @change="phoneInputHandler('workPhone', $event)"
+                            :required="workPhoneRequired"
+                            ></b-form-input>
+                        </b-form-group>
+                        
+                        <!-- Address -->
+                        <b-form-group 
+                          label-cols-sm="3"
+                          label="Address:"
+                          label-align-sm="right"
+                          label-for="nested-country"
+                        >
+                            <b-form-input
+                            id="input-6"
+                            v-model="address"
+                            type="text"
+                            :required="addressRequired"
+                            ></b-form-input>
+                        </b-form-group>
                           <!--DO NOT DELETE, DATE FIELD FOR PROFILE, NOT FUNCTIONAL RN
                         <b-form-group
                             label-cols-sm="3"
@@ -300,9 +362,16 @@ export default {
         last_name: "",
         display_name: "",
         DOB: "",
-        avatar: ""
+        avatar: "",
+        homePhone: "",
+        mobilePhone: "",
+        workPhone: "",
+        address: ""
       },
-    
+      homePhoneRequired: true,
+      workPhoneRequired: true,
+      mobilePhoneRequired: true,
+      addressRequired: true,
     };
   },
   mounted: function() {
@@ -316,6 +385,24 @@ export default {
     });
   },
   methods: {
+     phoneInputHandler(inputType, value) {
+        if (value) {
+            // If we are in here, it means one of the phone related inputs
+            // has a non-null value. Therefore, set the 'required' attribute to false
+            // for the other inputs. (we only require at least one phone number).
+            if (inputType === "homePhone") {
+                this.mobilePhoneRequired = false;
+                this.workPhoneRequired = false;
+            } else if (inputType === "mobilePhone") {
+                this.homePhoneRequired = false;
+                this.workPhoneRequired = false;
+            } else if (inputType === "workPhone") {
+                this.homePhoneRequired = false;
+                this.mobilePhoneRequired = false;
+            }
+        }
+    },
+
     getPetAvatar (prop) {
       return prop.avatar ? prop.avatar : "https://i0.wp.com/wrbbradio.org/wp-content/uploads/2016/10/grey-background-07.jpg?fit=2560%2C1544"
     },
@@ -465,7 +552,11 @@ export default {
         last_name: "",
         display_name: "",
         DOB: "",
-        avatar: ""
+        avatar: "",
+        homePhone: "",
+        mobilePhone: "",
+        workPhone: "",
+        address: ""
       }
     },
     onFileSelected(event) {
@@ -606,6 +697,50 @@ export default {
       },
       set(DOB) {
         this.editedUser.DOB = DOB;
+      }
+    },
+    homePhone: {
+      get() {
+         if (this.user) {
+          return this.user.homePhone
+        }
+        
+      },
+      set(value) {
+        this.editedUser.homePhone = value;
+      }
+    },
+    mobilePhone: {
+      get() {
+         if (this.user) {
+          return this.user.mobilePhone
+        }
+        
+      },
+      set(value) {
+        this.editedUser.mobilePhone = value;
+      }
+    },
+    workPhone: {
+      get() {
+         if (this.user) {
+          return this.user.workPhone
+        }
+        
+      },
+      set(value) {
+        this.editedUser.workPhone = value;
+      }
+    },
+     address: {
+      get() {
+         if (this.user) {
+          return this.user.address
+        }
+        
+      },
+      set(value) {
+        this.editedUser.address = value;
       }
     }
   },

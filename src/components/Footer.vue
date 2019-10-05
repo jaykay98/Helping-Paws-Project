@@ -42,11 +42,8 @@
         <b-col class="mt-2">
           <h5 class="title">Our Community</h5>
           <span class="image-links">
-            <a href="https://www.rscpa.org.au/" target="_blank" rel="noopener noreferrer">
-              <img src="@/assets/rspca-logo.png" width="140px" alt="RSPCA Logo" />
-            </a>
-            <a href="https://www.awlqld.com.au" target="_blank" rel="noopener noreferrer">
-              <img src="@/assets/AWLQ_logo.png" width="140px" alt="AWQL Logo" />
+            <a href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program" target="_blank" rel="noopener noreferrer">
+              <img src="@/assets/large_HPAP_Logo.png" width="140px" alt="HPAP logo" />
             </a>
             <a href="https://lostpetfinders.com.au" target="_blank" rel="noopener noreferrer">
               <img

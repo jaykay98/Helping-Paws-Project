@@ -40,7 +40,17 @@
               :to="item.route"
             >{{ item.title }}</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item to="/forms">Forms & Adopting</b-nav-item>
+          <!-- <b-nav-item to="/forms">Forms & Adopting</b-nav-item> -->
+
+           <b-nav-item-dropdown text="Forms & Adopting">
+            <b-dropdown-item to="/forms">Forms</b-dropdown-item>
+            
+            <b-dropdown-item 
+            href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
+            target="_blank" rel="noopener noreferrer"
+            >Adopting
+            </b-dropdown-item>
+           </b-nav-item-dropdown>
          
           <b-nav-item-dropdown text="About Us">
             <b-dropdown-item to="/contact-us">Contact Us</b-dropdown-item>
@@ -144,6 +154,7 @@ export default {
   computed: {
    //check if user is logged in or not
     isAuthenticatedLoginSignup() {
+      console.log('asdf', this.$store.getters.user)
       return (
         this.$store.getters.user && 
         Object.keys(this.$store.getters.user).length > 0 &&
