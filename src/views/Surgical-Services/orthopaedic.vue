@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Surgical Services" page="Orthopaedic" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Orthopaedic</h1>
         <p class="text-justify">Orthopaedic surgery encompasses any surgery that is related to bones or joints. It includes procedures such as fracture repairs, ligament repairs and spinal surgery to name a few.</p>
         <p class="text-justify">Our veterinarians’ high level of expertise and our practice’s fully equipped surgical suite allows us to perform certain orthopaedic surgical procedures that your pet may require. These may include:</p>

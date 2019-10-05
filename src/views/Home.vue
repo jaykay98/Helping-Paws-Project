@@ -8,22 +8,13 @@
         header="Helping Paws Vet Clinic"
         lead="We love & care for your pets!"
       ></b-jumbotron> -->
-      <b-carousel controls indicators img-width="1024" img-height="480">
+      <b-carousel img-width="1024" img-height="480">
         <b-carousel-slide
           class="carousel"
           img-src="@/assets/helping-paws-banner.jpg"
           img-width="1024"
           img-height="480"
         ></b-carousel-slide>
-        <b-carousel-slide>
-          <img
-            slot="img"
-            width="1024"
-            height="480"
-            src="@/assets/baby-knoxx.jpg"
-            alt="Baby Knoxx, a little Black pug"
-          />
-        </b-carousel-slide>
       </b-carousel>
     </b-container>
   </div>
@@ -42,5 +33,6 @@ export default {};
 }
 .carousel {
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 </style>

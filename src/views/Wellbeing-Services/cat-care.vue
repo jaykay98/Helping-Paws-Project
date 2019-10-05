@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Wellbeing Services" page="Cat Care" />
+        <b-img center src="@/assets/banner-cats.jpg" fluid alt="Cat Banner"></b-img>
         <h1>Cat Care</h1>
         <p class="text-justify">Cats can make excellent companions and are wonderful pets. However, with an average lifespan ranging from 15-20 years, owning a cat is a long-term commitment and their needs must be carefully considered.</p>
         <p class="text-justify">Before you bring your cat or kitten home, we suggest you contact your local council and enquire about its regulations regarding such things as night curfews, compulsory containment within a property, desexing and microchipping.</p>

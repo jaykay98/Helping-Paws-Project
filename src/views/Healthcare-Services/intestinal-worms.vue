@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Intestinal Worms" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Intestinal Worms</h1>
         <p class="text-justify">There are two broad categories of worms that may affect our pet dogs and cats, intestinal worms and heartworms.  Please see our heartworm page for more information.</p>
 

@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Pet Insurance" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Pet Insurance</h1>
         <p class="text-justify">Pet insurance is becoming more and more popular in Australia. It offers you peace of mind as it covers some or all of the treatment costs if your pet was ever involved in an accident or suffers a sudden illness. There is no equivalent of Medicare for pets, thus often treatment costs exceed what an equivalent problem would cost for a human patient.</p>
         <p class="text-justify">Did you know that 24 hr emergency care for animals can cost over $1,000 per day? Some surgeries such as repair of fractured bones or exploratory surgery can also add up to thousands of dollars and that does not even include the recovery and aftercare treatment. It is a heartbreaking situation to have to choose between the health of your pet and financial constraints, so for peace of mind we strongly recommend that your pet is insured.</p>

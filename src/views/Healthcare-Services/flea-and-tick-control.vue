@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Flea and Tick Control" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Flea and Tick Control</h1>
         <h3 class="text-justify">Flea Control</h3>
         <p

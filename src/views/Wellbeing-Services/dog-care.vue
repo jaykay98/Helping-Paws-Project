@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Wellbeing Services" page="Dog Care" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Dog Care</h1>
         <p class="text-justify">Owning a dog provides companionship, loyalty and affection for people of all ages and is an invaluable addition to families and individuals.</p>
         <p class="text-justify">However, it is important to find the breed of dog most suitable to your particular lifestyle and be aware of the responsibility that comes with dog ownership before you adopt or purchase a dog. As your vet, we are willing to discuss the many aspects of dog care, including breed-specific medical problems and routine health care such as vaccinations, flea and tick control, desexing and worming that your future dog may need.</p>

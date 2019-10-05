@@ -9,7 +9,6 @@
             </div>
         </div>
     <b-navbar class="navbar" toggleable="md" type="light">
-      <b-navbar-brand href="/">Helping Paws Vet Clinic</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -44,14 +43,14 @@
 
            <b-nav-item-dropdown text="Forms & Adopting">
             <b-dropdown-item to="/forms">Forms</b-dropdown-item>
-            
+
             <b-dropdown-item 
             href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
             target="_blank" rel="noopener noreferrer"
             >Adopting
             </b-dropdown-item>
            </b-nav-item-dropdown>
-         
+
           <b-nav-item-dropdown text="About Us">
             <b-dropdown-item to="/contact-us">Contact Us</b-dropdown-item>
             <b-dropdown-item to="/meet-our-team">Meet Our Team</b-dropdown-item>
@@ -191,7 +190,7 @@ export default {
 
 <style>
 .navbar-light .navbar-nav .nav-link {
-  color: black !important;
+  color: white !important;
   transition: 0.2s ease all;
   border-radius:3px;
   -webkit-transition: background-color ease-out 0.2s;
@@ -208,12 +207,11 @@ export default {
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-  background-color: blue !important;
-  color: white !important;
+  background-color: lime !important;
+  color: black !important;
 }
 .navbar-light .navbar-nav .dropdown-item:hover {
-  background-color: blue;
-  color: white;
+  background-color: lime;
 }
 .container-fluid {
   height: 100px;

@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Surgical Services" page="Dental" />
+        <b-img center src="@/assets/banner-cats.jpg" fluid alt="Cat Banner"></b-img>
         <h1>Dental</h1>
         <p class="text-justify">Just like humans, our pets are vulnerable to gum disease and problems with their teeth. Alarmingly, 80% of dogs and 70% of cats suffer from some form of dental disease by the age of three.</p>
         <p class="text-justify">When there is a build up of bacteria, food particles and saliva on the teeth plaque is formed. Plaque sticks to the tooth surface above and below the gum line and if not removed will calcify into tartar (also known as calculus). This appears as a yellow-brown material on the teeth. Over time the bacterial infection in tartar causes irreversible changes to occur.</p>

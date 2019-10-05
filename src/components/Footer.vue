@@ -2,57 +2,48 @@
   <footer id="footer" class="footer">
     <div class="container">
       <div class="row justify-content-center">
-        <b-col id="footer-content" class="col-md-3 mt-2">
+        <b-col id="footer-content" class="col-lg-5 col-md-12 col-sm-12 mt-2">
           <h5 class="purple">Clinic Details</h5>
-          <address>
+          <p class="clinic-details">
             <strong>Helping Paws Vet Clinic</strong>
-            <br />3684-3688 Mount Lindesay Highway
-            <br />Park Ridge, QLD, 4125
             <br />
-            <fa-icon :icon="['fas', 'phone']" />
-            <a href="tel:+610732971005"> (07) 3297 1005</a>
+            <fa-icon class="mr-2" :icon="['fas', 'map-marker-alt']" />3684-3688 Mount Lindesay Highway, Park Ridge, 4125, Queensland
             <br />
-            <fa-icon :icon="['fas', 'envelope']" />
-            <a href="mailto:helpingpawsvet@yahoo.com.au"> helpingpawsvet@yahoo.com.au</a>
-          </address>
+            <fa-icon class="mr-2" :icon="['fas', 'phone']" />(07) 3297 1005
+            <br />
+            <fa-icon class="mr-2" :icon="['fas', 'envelope']" />helpingpawsvet@yahoo.com.au
+          </p>
         </b-col>
-        <b-col class="mt-2 mb-3">
+        <b-col class="col-lg-3 col-md-12 col-sm-12 mt-2">
           <h5 class="title">Clinic Hours</h5>
-          <ul class="list-unstyled">
-            <li>Monday: 8:30AM - 5:30PM</li>
-            <li>Tuesday: 8:30AM - 5:30PM</li>
-            <li>Wednesday: 8:30AM - 5:30PM</li>
-            <li>Thursday: 8:30AM - 5:30PM</li>
-            <li>Friday: 8:30AM - 5:30PM</li>
-            <li>Saturday: CLOSED</li>
-            <li>Sunday: CLOSED</li>
-          </ul>
+          <p class="hour-details">
+            <strong>Mon-Fri:</strong> 8:30am - 5:30pm
+            <br />
+            <strong>Sat-Sun:</strong> Closed
+          </p>
         </b-col>
-        <b-col class="col-md-3 mt-2">
-          <h5 class="title">Follow Us</h5>
+        <b-col class="col-lg-3 col-md-12 col-sm-12 mt-2">
+          <h5 class="title">Our Community</h5>
           <a
             aria-label="Helping Paws Facebook Page"
             href="https://www.facebook.com/helpingpawsveterinaryclinic/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <fa-icon :icon="['fab', 'facebook-square']" /> Facebook
+            <fa-icon class="mr-2" :icon="['fab', 'facebook-square']" />Facebook
           </a>
-        </b-col>
-        <b-col class="mt-2">
-          <h5 class="title">Our Community</h5>
-          <span class="image-links">
-            <a href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program" target="_blank" rel="noopener noreferrer">
-              <img src="@/assets/large_HPAP_Logo.png" width="140px" alt="HPAP logo" />
-            </a>
-            <a href="https://lostpetfinders.com.au" target="_blank" rel="noopener noreferrer">
-              <img
-                src="@/assets/lost-pet-finders-logo.png"
-                width="140px"
-                alt="Lost Pet Finders Logo"
-              />
-            </a>
-          </span>
+          <br />
+          <a
+            href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <fa-icon class="mr-2" :icon="['fas', 'dog']" />Helping Paws Adoption Program
+          </a>
+          <br />
+          <a href="https://lostpetfinders.com.au" target="_blank" rel="noopener noreferrer">
+            <fa-icon class="mr-2" :icon="['fas', 'paw']" />Lost Pet Finders
+          </a>
         </b-col>
       </div>
       <hr />
@@ -73,7 +64,16 @@ export default {
 #footer {
   background-color: #eeeeee;
 }
+
+.clinic-details {
+  font-size: 14px;
+}
+
+.hour-details {
+  font-size: 14px;
+}
+
 .copyright-text {
-  font-size: .899rem;
+  font-size: 0.899rem;
 }
 </style>
