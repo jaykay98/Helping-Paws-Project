@@ -44,7 +44,7 @@
            <b-nav-item-dropdown text="Forms & Adopting">
             <b-dropdown-item to="/forms">Forms</b-dropdown-item>
 
-            <b-dropdown-item 
+            <b-dropdown-item
             href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
             target="_blank" rel="noopener noreferrer"
             >Adopting
@@ -76,7 +76,6 @@
 </template>
 
 <script>
-import { fb } from "@/firebase";
 export default {
   name: "Navbar",
   data() {

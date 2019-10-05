@@ -4,13 +4,7 @@
       <div class="col-md-6 mt-5 mx-auto">
         <h2 class="mb-3 font-weight-normal">Login to your Account</h2>
 
-        <b-alert
-          variant="danger"
-          dismissible
-          v-model="showError"
-          :show="showError"
-          >{{ errorMsg }}</b-alert
-        >
+        <b-alert variant="danger" dismissible v-model="showError" :show="showError">{{ errorMsg }}</b-alert>
 
         <b-form @submit.prevent="login">
           <b-form-group label="Email Address" label-for="email">
@@ -38,14 +32,11 @@
           <b-button block type="submit" variant="primary">Login</b-button>
 
           <p align="center" class="mt-3">
-            Don't have an account?<router-link to="/users/register"
-              > Sign Up</router-link
-            >
+            Don't have an account?
+            <router-link to="/users/register">Sign Up</router-link>
           </p>
           <p align="center">
-            <router-link to="/users/forgotpassword"
-              >Forgot your password?</router-link
-            >
+            <router-link to="/users/forgotpassword">Forgot your password?</router-link>
           </p>
         </b-form>
       </div>
@@ -82,10 +73,19 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("signUserIn", {
-        email: this.email,
-        password: this.password
-      });
+      fb.auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$store.dispatch("signUserIn", {
+            email: this.email,
+            password: this.password
+          });
+        })
+        .catch(error => {
+          this.showError = true;
+          this.errorMsg = error.message;
+          console.log(error);
+        })
     },
     onResetPassword() {
       if (this.email === "") {
