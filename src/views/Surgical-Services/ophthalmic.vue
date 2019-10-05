@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Surgical Services" page="Ophthalmic" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Ophthalmic</h1>
         <p class="text-justify">Ophthalmic surgery is the specific area of pet care involving treatment of an animal’s eyes. For certain breeds, this service also involves the examination and certification of breeding dogs to verify their eyes are in good condition.</p>
         <p class="text-justify">Eye examinations require specific equipment, such as an ophthalmoscope (a magnifying light to look into the eye). Our veterinarians may also use a special dye called fluorescein (it glows a green/yellow colour under a UV light) to identify damage to the cornea (the clear layer at the front of the eye). Many eye conditions can be treated medically, however, specific conditions may require surgery.</p>

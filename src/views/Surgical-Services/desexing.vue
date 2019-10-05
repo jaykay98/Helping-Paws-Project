@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Surgical Services" page="Desexing" />
+        <b-img center src="@/assets/banner-cats.jpg" fluid alt="Cat Banner"></b-img>
         <h1>Desexing</h1>
         <p class="text-justify">Desexing or neutering your pet is a surgical procedure that prevents them from being able to reproduce. In male pets it is commonly referred to as “castration”, and in female pets as “spaying”.This is the most frequent surgery performed by our vets, and generally your pet is home by the evening of surgery.</p>
         <p class="text-justify">The most common age to desex your pet is between 4 and 6 months, however they are never too old to be desexed.</p>

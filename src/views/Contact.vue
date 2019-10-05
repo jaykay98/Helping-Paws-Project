@@ -18,8 +18,8 @@
           ></iframe>
         </div>
 
-        <h6 align="center">Alternatively, you can send us an email via the form below:</h6>
-        <b-form class="col-md-6 mt-5 mx-auto" action="https://formspree.io/jkidd0020@gmail.com" method="POST">
+        <h6 class="mt-3" align="center">Alternatively, you can send us an email via the form below:</h6>
+        <b-form class="col-md-6 mt-3 mx-auto" action="https://formspree.io/jkidd0020@gmail.com" method="POST">
           <b-form-group label="Name" label-for="name">
             <b-form-input
               type="text"

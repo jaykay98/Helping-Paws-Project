@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
+import Emergency from "../views/Emergency.vue";
 import Register from "../views/Users/Register.vue";
 import Login from "../views/Users/Login.vue";
 import ForgotPassword from '../views/Users/ForgotPassword.vue';
@@ -33,6 +34,7 @@ import NutritionalAdvice from '../views/Wellbeing-Services/nutritional-advice.vu
 import DogCare from '../views/Wellbeing-Services/dog-care.vue';
 import CatCare from '../views/Wellbeing-Services/cat-care.vue';
 import FleaControl from '../views/Wellbeing-Services/flea-control.vue';
+import Forms from '../views/Forms.vue';
 import AuthGuard from "./auth-guard";
 import NotFound from "../views/404.vue";
 
@@ -46,6 +48,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/emergency",
+      name: "emergency",
+      component: Emergency
     },
     {
       path: "/healthcare-services/healthchecks",
@@ -178,6 +185,11 @@ export default new Router({
       component: FleaControl
     },
     {
+      path: '/forms',
+      name: 'forms',
+      component: Forms
+    },
+    {
       path: "/contact-us",
       name: "contact",
       // route level code-splitting
@@ -185,6 +197,15 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "../views/Contact.vue")
+    },
+    {
+      path: "/meet-our-team",
+      name: "meet",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ "../views/OurTeam.vue")
     },
     {
       path: "/users/register",
@@ -207,9 +228,9 @@ export default new Router({
       beforeEnter: AuthGuard,
       children: [
         {
-          path: "pets",
+          path: "pets/:id",
           name: "pets",
-          component: Pets
+          component: Pets,
         },
         {
           path: "details",

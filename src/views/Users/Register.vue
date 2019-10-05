@@ -107,11 +107,6 @@ export default {
       return this.password.length >= 6;
     },
     comparePasswords() {
-      console.log(this.password.length >= 6);
-      console.log(
-        this.password === this.confirmPassword &&
-          this.confirmPassword.length > 0
-      );
       return (
         this.password === this.confirmPassword &&
         this.confirmPassword.length > 0
@@ -152,13 +147,12 @@ export default {
                 email: this.email,
                 created: currentTime
               });
-            this.$store.dispatch("signUserUp", {
-              email: this.email,
-              password: this.password
-            });
 
+            // Redirect the user to the login page
+            this.$router.push("/users/login");
+
+            // Send an email verification to the user
             let newUser = fb.auth().currentUser;
-
             newUser
               .sendEmailVerification()
               .then(() => {

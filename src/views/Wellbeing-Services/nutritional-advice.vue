@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Wellbeing Services" page="Nutritional Advice" />
+        <b-img center src="@/assets/banner-cats.jpg" fluid alt="Cat Banner"></b-img>
         <h1>Nutritional Advice</h1>
         <p
           class="text-justify"

@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Specialist Referrals" />
+        <b-img center src="@/assets/banner-cats.jpg" fluid alt="Cat Banner"></b-img>
         <h1>Specialist Referrals</h1>
         <p
           class="text-justify"

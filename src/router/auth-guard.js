@@ -1,9 +1,14 @@
-import { store } from '../store';
 
+import * as firebase from "firebase";
 export default (to, from, next) => {
-  if (store.getters.user) {
-    next()
-  } else {
-    next('/users/login');
-  }
+  console.log("auth guard check ")
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      next()
+    } else {
+      // No user is signed in.
+      next('/users/login');
+    }
+  });
 }

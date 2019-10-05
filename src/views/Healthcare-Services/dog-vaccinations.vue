@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Dog Vaccination" />
-        <b-img center src="@/assets/dog-vaccinated.jpg" fluid alt="Dog being vaccinated with a needle"></b-img>
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Dog Vaccination</h1>
         <p class="text-justify">Vaccination has revolutionised control of infectious disease in our pets. It is essential that all pets are adequately vaccinated to help protect the pet population as a whole. Responsible pet care requires puppies to be given their initial course of vaccinations, but this cannot protect them for the rest of their lives. Adult dogs require regular vaccination to maintain immunity against disease.</p>
 

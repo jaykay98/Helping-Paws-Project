@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Health Checks" />
-        <b-img center src="@/assets/dog-banner-3.jpg" fluid alt="Dog being diagnosed with a Stethoscope"></b-img>
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Health Checks</h1>
         <p class="text-justify">
           Pets, on average, age five to eight times faster than humans. By age two,

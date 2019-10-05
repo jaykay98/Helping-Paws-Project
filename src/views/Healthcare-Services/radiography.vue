@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <Breadcrumbs service="Healthcare Services" page="Radiography" />
+        <b-img center src="@/assets/banner-dogs.jpg" fluid alt="Dog Banner"></b-img>
         <h1>Radiography</h1>
         <p class="text-justify">Our hospital is fully equipped to take radiographs (often called X-rays) of your pet.  Our veterinarians will discuss your pet’s case and conduct a thorough physical examination to determine if your pet requires radiographs. Radiographs are a very important tool to help us diagnose diseases in animals, particularly for conditions involving bones, the chest or abdomen.</p>
 
