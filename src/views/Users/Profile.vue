@@ -48,7 +48,7 @@
                       Submitted Names:
                       <div v-if="personSubmittedNames.length === 0">--</div>
                       <ul v-else class="mb-0 pl-3">
-                        <li v-for="name in personSubmittedNames">{{ name }}</li>
+                        <li v-for="name in personSubmittedNames" :key="name">{{ name }}</li>
                       </ul>
                     </div>
                     <!-- using b-modal to create popup window with user details that can be edited,
@@ -298,8 +298,9 @@
             <b-card no-body class="overflow-hidden" style="max-width: 540px;">
               <b-row>
                 <b-col md="12" >
-                  <div class = "pet-card-image">
-                    <b-img 
+                  <div class="pet-card-image">
+                    <b-img
+                      id="pet-image"
                       @click="petLink(prop.id)"
                       thumbnail 
                       fluid
@@ -987,6 +988,10 @@ export default {
 .add-pet {
   float: right;
   margin: 0 10px;
+}
+
+.pet-card-image #pet-image:hover {
+  cursor: pointer;
 }
 
 /* profile overlay styling*/
