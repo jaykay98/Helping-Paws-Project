@@ -212,6 +212,7 @@ export default {
 .navbar-light .navbar-nav .dropdown-item:hover {
   background-color: lime;
 }
+
 .container-fluid {
   height: 100px;
   background-color: #1565C0
