@@ -152,7 +152,6 @@ export default {
   computed: {
    //check if user is logged in or not
     isAuthenticatedLoginSignup() {
-      console.log('asdf', this.$store.getters.user)
       return (
         this.$store.getters.user && 
         Object.keys(this.$store.getters.user).length > 0 &&
@@ -169,13 +168,11 @@ export default {
       );
     },
     user() {
-      console.log(this.$store.getters.user);
       return this.$store.getters.user;
     }
   },
   methods: {
     logout() {
-      console.log(this.$route.path);
       this.$store.dispatch("logout");
       if (this.$route.path !== "/") {
         this.$router.push("/");

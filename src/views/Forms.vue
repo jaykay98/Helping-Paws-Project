@@ -295,7 +295,6 @@
                     })
                     .then((response) => response.json())
                     .then((json) => {
-                        console.log('Success:', json);
                         this.makeToast();
                     });
                 } catch (error) {
@@ -303,7 +302,6 @@
                 }
             },
             addPet() {
-                console.log('addpet')
                 this.form.pets.push({
                     index: this.form.pets.length,
                     desexed: false,
