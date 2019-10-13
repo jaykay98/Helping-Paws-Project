@@ -1,15 +1,20 @@
 <template>
   <div>
-     <div class="container-fluid" >
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="main-header-title">Helping Paws Vet Clinic</h2>
-                     <h2 class="main-header-pn">Ph: (07) 3297 1005</h2>
-                </div>
-            </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <router-link exact to="/">
+            <img
+              class="mt-3"
+              src="@/assets/helping-paws-logo-big.jpg"
+              width="200px"
+              alt="Helping Paws Logo"
+            />
+          </router-link>
         </div>
+      </div>
+    </div>
     <b-navbar class="navbar" toggleable="md" type="light">
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -41,20 +46,20 @@
           </b-nav-item-dropdown>
           <!-- <b-nav-item to="/forms">Forms & Adopting</b-nav-item> -->
 
-           <b-nav-item-dropdown text="Forms & Adopting">
+          <b-nav-item-dropdown text="Forms & Adopting">
             <b-dropdown-item to="/forms">Forms</b-dropdown-item>
 
             <b-dropdown-item
-            href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
-            target="_blank" rel="noopener noreferrer"
-            >Adopting
-            </b-dropdown-item>
-           </b-nav-item-dropdown>
+              href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Adopting</b-dropdown-item>
+          </b-nav-item-dropdown>
 
           <b-nav-item-dropdown text="About Us">
             <b-dropdown-item to="/contact-us">Contact Us</b-dropdown-item>
             <b-dropdown-item to="/meet-our-team">Meet Our Team</b-dropdown-item>
-           </b-nav-item-dropdown>
+          </b-nav-item-dropdown>
           <!-- <b-nav-item to="/contact-us">Contact Us</b-nav-item> -->
         </b-navbar-nav>
 
@@ -150,10 +155,10 @@ export default {
     };
   },
   computed: {
-   //check if user is logged in or not
+    //check if user is logged in or not
     isAuthenticatedLoginSignup() {
       return (
-        this.$store.getters.user && 
+        this.$store.getters.user &&
         Object.keys(this.$store.getters.user).length > 0 &&
         this.$store.getters.user.fetched &&
         !this.$store.getters.user.id
@@ -161,7 +166,7 @@ export default {
     },
     isAuthenticatedMyAccount() {
       return (
-        this.$store.getters.user && 
+        this.$store.getters.user &&
         Object.keys(this.$store.getters.user).length > 0 &&
         this.$store.getters.user.fetched &&
         this.$store.getters.user.id
@@ -177,7 +182,7 @@ export default {
       if (this.$route.path !== "/") {
         this.$router.push("/");
       } else {
-        window.location.href = '/';
+        window.location.href = "/";
       }
     }
   }
@@ -188,7 +193,7 @@ export default {
 .navbar-light .navbar-nav .nav-link {
   color: white !important;
   transition: 0.2s ease all;
-  border-radius:3px;
+  border-radius: 3px;
   -webkit-transition: background-color ease-out 0.2s;
   -moz-transition: background-color ease-out 0.2s;
   -o-transition: background-color ease-out 0.2s;
@@ -212,24 +217,22 @@ export default {
 
 .container-fluid {
   height: 100px;
-  background-color: #1565C0
+  background-color: #1565c0;
 }
 .main-header-title {
-  margin-left:8.5%;
+  margin-left: 8.5%;
   color: white;
   /* position: absolute; */
   /* top: 20px; */
 }
 .main-header-pn {
-  margin-left:8.5%;
+  margin-left: 8.5%;
   color: white;
   /* position: absolute; */
   /* top: 50px;
   right: 50px; */
-
 }
-.navbar{
-  background-color: #2962FF
+.navbar {
+  background-color: #2962ff;
 }
-
 </style>

@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <div class="col-md-6 mt-5 mx-auto">
+      <div class="col-md-6 mt-5 mb-5 mx-auto">
         <h2 class="mb-3 font-weight-normal">Create an Account</h2>
 
         <b-alert variant="danger" dismissible v-model="showError" :show="showError">{{errorMsg}}</b-alert>
@@ -73,14 +73,14 @@
             <b-form-invalid-feedback :state="comparePasswords">Passwords do not match</b-form-invalid-feedback>
           </b-form-group>
 
+          <b-button block type="submit" :disabled="loading" variant="primary">Submit</b-button>
+
           <div>
-            <p>
+            <p class="mt-3">
               Already have an account?
               <router-link to="/users/login">Login Here</router-link>
             </p>
           </div>
-
-          <b-button block type="submit" :disabled="loading" variant="primary">Submit</b-button>
         </b-form>
       </div>
     </b-row>
