@@ -208,11 +208,12 @@ export default {
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-  background-color: lime !important;
-  color: black !important;
+  background-color: darkblue !important;
+  color: white !important;
 }
 .navbar-light .navbar-nav .dropdown-item:hover {
-  background-color: lime;
+  background-color: darkblue;
+  color: white;
 }
 
 .container-fluid {
