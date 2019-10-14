@@ -48,7 +48,7 @@
                       Submitted Names:
                       <div v-if="personSubmittedNames.length === 0">--</div>
                       <ul v-else class="mb-0 pl-3">
-                        <li v-for="name in personSubmittedNames">{{ name }}</li>
+                        <li v-for="name in personSubmittedNames" :key="name">{{ name }}</li>
                       </ul>
                     </div>
                     <!-- using b-modal to create popup window with user details that can be edited,
@@ -298,8 +298,9 @@
             <b-card no-body class="overflow-hidden" style="max-width: 540px;">
               <b-row>
                 <b-col md="12" >
-                  <div class = "pet-card-image">
-                    <b-img 
+                  <div class="pet-card-image">
+                    <b-img
+                      id="pet-image"
                       @click="petLink(prop.id)"
                       thumbnail 
                       fluid
@@ -378,9 +379,6 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.getProfile(user.uid)
-        console.log("this is user id in profile page", user.uid);
-        console.log("this is user details in profile page", user);
-        console.log("uuid ", uuidv4())
       }
     });
   },
@@ -449,7 +447,6 @@ export default {
       },
     
       deletePet(petId){
-        console.log("this is the pet id going to be deleted ", this.user.pets[petId])
         let petToDelete = this.user.pets[petId]
         const firebaseObj = {
           [`pets.${petId}`]: firebase.firestore.FieldValue.delete()
@@ -482,15 +479,7 @@ export default {
       let randPetID = uuidv4();
       let firebaseObj = {};
           Object.keys(clone).map((key) => {
-            console.log(this.addedPet.age)
-            console.log(this.addedPet.colour)
-            console.log(this.addedPet.gender)
-            console.log(this.addedPet.name)
-            console.log("very cool log")
             firebaseObj[`pets.${randPetID}.${key}`] = clone[key];
-            console.log(firebaseObj)
-            console.log("clone ",clone)
-            console.log("clone key: ",clone[key])
           });
         return this.updatePets({
           'firebasePayload': firebaseObj,
@@ -519,30 +508,24 @@ export default {
         ref
           .put(this.file)
           .then(snapshot => {
-            console.log("Uploaded a blob or file!", snapshot);
             return snapshot.ref.getDownloadURL();
           })
           .then(url => {
-            console.log(url);
             this.editedUser.avatar = url;
             // Remove keys that were no edited in editedUser (empty strings)
             const clone = this.cloneUserFields();
-            console.log(clone);
             return this.updateProfile(clone)
           });
       } else {
           const clone = this.cloneUserFields();
-          console.log(clone);
           return this.updateProfile(clone)
       }
 
     },
     editClick() {
-      console.log("edit button clicked");
       this.isDisabled = false;
     },
     cancel() {
-      console.log("cancel button clicked");
       this.isDisabled = true;
       //re-render parent card and all its child inputs
       this.componentKey += 1;
@@ -560,72 +543,49 @@ export default {
       }
     },
     onFileSelected(event) {
-      console.log(event.target.files[0].name);
       this.file = event.target.files[0];
       this.submitForm();
     },
-
-    firstImageClick() {
-      console.log("first image clicked");
-    },
-    secondImageClick() {
-      console.log("second image clicked");
-    },
-    thirdImageClick() {
-      console.log("third image clicked");
-    },
-    fourthImageClick() {
-      console.log("fourth image clicked");
-    }
   },
   computed: {
     ...mapGetters(["user"]),
-    
     petsArr: function() {
       if (this.user && this.user.pets) {
-        console.log('this.user', this.user);
         const result = Object.keys(this.user.pets).map((petId) => {
           return {
             ...this.user.pets[petId],
             id: petId
           };
         })
-        console.log('result', result);
         return result;
       }
     },
      petsArrGalleryData: function() {
       if (this.user && this.user.pets) {
-        console.log('this.user', this.user);
         const result = Object.keys(this.user.pets).map((petId) => {
           return {
             ...this.user.pets[petId],
             id: petId
           };
         })
-        console.log('result', result);
         const petsList = [];
         result.forEach(function(element) {
           let petsListObj = {}
           petsListObj.title = element.name
           petsListObj.url = element.avatar
-          console.log("computed pets list obj", petsListObj)
           petsList.push(petsListObj)
         });
-        console.log("PETS LIST IN COMPUTED", petsList)
         return petsList;
       }
     },
     petsArrGrid: function() {
       if (this.user && this.user.pets) {
-        console.log('this.user', this.user);
         const result = Object.keys(this.user.pets).map((petId) => {
           return {
             ...this.user.pets[petId],
             id: petId
           };
         })
-        console.log('result', result);
        const layout = []
        result.forEach(function(element, index) {
           let petsListObj = {}
@@ -639,17 +599,15 @@ export default {
           petsListObj.maxH = 4
           petsListObj.url = element.avatar
           petsListObj.id = element.id
-          console.log("computed pets list obj", petsListObj)
           layout.push(petsListObj)
         });
         return layout;
       }
     },
-  
+
     email: {
       get() {
          if (this.user) {
-          console.log('debug: this.email get called');
             return this.user.email;
         }
       },
@@ -693,7 +651,7 @@ export default {
          if (this.user) {
           return this.user.DOB.toDate().toLocaleDateString("en-AU");
         }
-        
+
       },
       set(DOB) {
         this.editedUser.DOB = DOB;
@@ -704,7 +662,7 @@ export default {
          if (this.user) {
           return this.user.homePhone
         }
-        
+
       },
       set(value) {
         this.editedUser.homePhone = value;
@@ -715,7 +673,7 @@ export default {
          if (this.user) {
           return this.user.mobilePhone
         }
-        
+
       },
       set(value) {
         this.editedUser.mobilePhone = value;
@@ -726,7 +684,7 @@ export default {
          if (this.user) {
           return this.user.workPhone
         }
-        
+
       },
       set(value) {
         this.editedUser.workPhone = value;
@@ -737,7 +695,7 @@ export default {
          if (this.user) {
           return this.user.address
         }
-        
+
       },
       set(value) {
         this.editedUser.address = value;
@@ -748,7 +706,6 @@ export default {
     // called before the route that renders this component is confirmed.
     // does NOT have access to `this` component instance,
     // because it has not been created yet when this guard is called!
-    console.log('beforeRouteUpdate', to.name)
     next(vm => {
       // if (to.name === 'pets') is true
       // then set this.pets = true
@@ -987,6 +944,10 @@ export default {
 .add-pet {
   float: right;
   margin: 0 10px;
+}
+
+.pet-card-image #pet-image:hover {
+  cursor: pointer;
 }
 
 /* profile overlay styling*/

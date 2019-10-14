@@ -14,6 +14,7 @@
           img-src="@/assets/helping-paws-banner.jpg"
           img-width="1024"
           img-height="480"
+          alt="Helping Paws Showcase"
         ></b-carousel-slide>
       </b-carousel>
     </b-container>

@@ -484,16 +484,13 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.getProfile(user.uid)
-        // this.getAllUsers()
-        console.log("this is user id in pet page", user.uid);
-        console.log("this is user details in pet page", user);
       }
     });
   },
-  
+
   methods: {
     ...mapActions(["getProfile","updatePets"]),
-      
+
       cloneUserFields(){
       const clone = { ...this.editedPet };
           Object.entries(clone).forEach(arr => {
@@ -512,19 +509,15 @@ export default {
         ref
           .put(this.file)
           .then(snapshot => {
-            console.log("Uploaded a blob or file!", snapshot);
             return snapshot.ref.getDownloadURL();
           })
           .then(url => {
-            console.log(url);
             this.editedPet.avatar = url;
             // Remove keys that were no edited in editedUser (empty strings)
             const clone = this.cloneUserFields();
             let firebaseObj = {};
             Object.keys(clone).map((key) => {
               firebaseObj[`pets.${this.$route.params.id}.${key}`] = clone[key];
-              console.log(firebaseObj)
-              console.log(this.$route.params.id)
             });
             return this.updatePets({
               'firebasePayload': firebaseObj,
@@ -541,7 +534,6 @@ export default {
           Object.keys(clone).map((key) => {
             firebaseObj[`pets.${this.$route.params.id}.${key}`] = clone[key];
           });
-          console.log("debug: submit form no avatar change ",this.$route.params.id)
            return this.updatePets({
               'firebasePayload': firebaseObj,
               'storePayload': {
@@ -554,11 +546,9 @@ export default {
 
     },
     editClick() {
-      console.log("edit button clicked");
       this.isDisabled = false;
     },
     cancel() {
-      console.log("cancel button clicked");
       this.isDisabled = true;
       //re-render parent card and all its child inputs
       this.componentKey += 1;
@@ -571,16 +561,8 @@ export default {
       }
     },
     onFileSelected(event) {
-      console.log(event.target.files[0].name);
       this.file = event.target.files[0];
       this.submitForm();
-    },
-
-    logPets(){
-      console.log("pets ", this.user.pets.aaaaaaaaaaaaaaa)
-    },
-    DogClicked() {
-      console.log("Dog button dropdown clicked");
     },
     listPetTypes() {
       const petTypeArr = ["Bearded Dragon" , "Birds", "Burro", "Cats","Chameleons (Veiled)","Chickens", "Chinchillas",
@@ -588,16 +570,11 @@ export default {
       "Goats","Guinea","Fowl","Guinea Pigs","Hamsters", "Hedgehogs","Horses","Iguanas","Llamas", "Lizards", "Mice",
       "Mule","Peafowl", "Pigs and Hogs", "Pigeons","Ponies", "Pot Bellied Pig", "Rabbits", "Rats", "Sheep", "Skinks", "Snakes",
       "Stick Insects", "Sugar Gliders", "Tarantula", "Turkeys","Turtles"]
-      for (let i =0; i<petTypeArr.length; i++) {
-        console.log("pet", petTypeArr[i])
-      }
     },
     getSelectedPetType(petType){
-      console.log("pet type clicked", petType)
       this.petTypeSelected=petType
     },
     getSelectedPetAge(petAge){
-      console.log("pet age selected: ", petAge)
       this.petAgeSelected = petAge
     },
      onSlideStart(slide) {
@@ -607,10 +584,9 @@ export default {
         this.sliding = false
       }
   },
-    
+
   computed: {
     ...mapGetters(["user"]),
-       
        petTypesArr: function() {
           const petTypeArr = ["Bearded Dragon" , "Birds", "Burro", "Cats","Chameleons (Veiled)","Chickens", "Chinchillas",
           "Chinese Water Dragon","Cows", "Dogs","Donkey","Ducks","Ferrets","Fish","Geckos","Geese (Chinese Swan Goose)", "Gerbils",
@@ -620,12 +596,9 @@ export default {
       },
     name: {
       get() {
-        console.log('debug: this.name get called');
         if (this.user && this.user.pets && this.user.pets[this.$route.params.id]) {
           return this.user.pets[this.$route.params.id].name;
         }
-        
-        
       },
       set(name) {
         this.editedPet.name = name;
@@ -636,11 +609,9 @@ export default {
          if (this.user && this.user.pets && this.user.pets[this.$route.params.id]) {
           return this.user.pets[this.$route.params.id].age;
         }
-        
       },
       set(age) {
         this.editedPet.age = age;
-        console.log( this.editedPet.age)
       }
     },
     colour: {
@@ -648,7 +619,6 @@ export default {
         if (this.user && this.user.pets && this.user.pets[this.$route.params.id]) {
            return this.user.pets[this.$route.params.id].colour;
         }
-       
       },
       set(colour) {
          this.editedPet.colour = colour;

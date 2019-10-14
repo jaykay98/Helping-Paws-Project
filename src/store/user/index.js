@@ -8,7 +8,6 @@ export default {
   },
   mutations: {
     setUser(state, payload) {
-      console.log('test:', state.user, payload)
       // Merging the existing use data with the updated use data
       state.user = merge(state.user, payload);
     },
@@ -69,7 +68,6 @@ export default {
     },
     logout({ commit }) {
       firebase.auth().signOut();
-      console.log('logging out')
       commit("resetUser", {});
     },
     getProfile({ commit }, userId) {
@@ -81,8 +79,6 @@ export default {
         querySnapshot.forEach(doc => {
           // doc.data() is never undefined for query doc snapshots
           commit("setUser", doc.data());
-          console.log("this is the doc data form getProfile store ", doc.data())
-          console.log('debug: getProfile finished');
         });
       });
     },
@@ -106,7 +102,6 @@ export default {
         .doc(this.getters.user.id)
         .update(payload)
         .then(function() {
-          console.log("Document successfully updated!", payload);
           commit("setUser", payload);
         })
         .catch(function(error) {
@@ -117,16 +112,12 @@ export default {
 
     updatePets({ commit }, { firebasePayload, storePayload }) {
       // Write to the database
-      console.log("firebasepayload: ", firebasePayload)
-      console.log("storepayload:", storePayload)
       return firebase
         .firestore()
         .collection("users")
         .doc(this.getters.user.id)
         .update(firebasePayload)
         .then(function() {
-          console.log("Document successfully updated!", firebasePayload);
-          console.log(storePayload)
           commit("setUser", storePayload);
         })
         .catch(function(error) {
@@ -138,7 +129,6 @@ export default {
       commit("removePet", petId);
     },
     setLocalUser ({ commit }, payload) {
-      console.log('setLocalUser')
       commit("setUser", payload);
     },
   },

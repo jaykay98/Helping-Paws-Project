@@ -7,7 +7,6 @@ import Login from "../views/Users/Login.vue";
 import ForgotPassword from '../views/Users/ForgotPassword.vue';
 import Profile from "../views/Users/Profile.vue";
 import Pets from "../views/Users/Pets.vue";
-import Details from "../views/Users/Details.vue";
 import Healthchecks from "../views/Healthcare-Services/healthchecks.vue";
 import CatVaccination from "../views/Healthcare-Services/cat-vaccinations.vue";
 import DogVaccination from "../views/Healthcare-Services/dog-vaccinations.vue";
@@ -42,6 +41,8 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
+  linkExactActiveClass: "active",
+  linkActiveClass: "active",
   base: process.env.BASE_URL,
   routes: [
     {
@@ -232,11 +233,6 @@ export default new Router({
           name: "pets",
           component: Pets,
         },
-        {
-          path: "details",
-          name: "details",
-          component: Details
-        }
       ]
     },
     {
