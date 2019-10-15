@@ -3,10 +3,10 @@
     <b-row>
       <div class="col my-4">
         <h1 align="center">Contact Us</h1>
-        <h6 align="center">
+        <p class="text-center">
           Contact us for friendly advice and professional pet health care by phone at
           <strong>(07) 3297 1005</strong>, or drop in to our practice here:
-        </h6>
+        </p>
         <div class="google-maps" align="center">
           <iframe
             width="600"
@@ -18,14 +18,18 @@
           ></iframe>
         </div>
 
-        <h6 class="mt-3" align="center">Alternatively, you can send us an email via the form below:</h6>
-        <b-form class="col-md-6 mt-3 mx-auto" action="https://formspree.io/jkidd0020@gmail.com" method="POST">
+        <p class="mt-3 text-center">Alternatively, you can send us an email via the form below:</p>
+        <b-form
+          class="col-md-6 mt-3 mx-auto"
+          action="https://formspree.io/jkidd0020@gmail.com"
+          method="POST"
+        >
           <b-form-group label="Name" label-for="name">
             <b-form-input
               type="text"
               name="name"
               v-model="name"
-              placeholder="Enter your name"
+              placeholder="Enter your full name"
               aria-required
               required
             ></b-form-input>
@@ -51,8 +55,7 @@
             ></b-form-textarea>
           </b-form-group>
 
-           <div class="g-recaptcha" :data-sitekey=recaptchaKey></div>
-
+          <div class="g-recaptcha" :data-sitekey="recaptchaKey"></div>
           <b-button block type="submit" variant="primary">Submit</b-button>
         </b-form>
       </div>
@@ -72,7 +75,5 @@ export default {
       googleMapURL: `https://www.google.com/maps/embed/v1/place?q=place_id:ChIJMwea3cdHkWsRkNoMIlwy7kw&key=${process.env.VUE_APP_MAPAPIKEY}`
     };
   },
-  methods: {
-  }
 };
 </script>

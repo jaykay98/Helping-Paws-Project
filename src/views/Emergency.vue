@@ -3,25 +3,26 @@
     <b-row>
       <b-col class="my-3" v-if="showEmergency">
         <h2 align="center">EMERGENCY!</h2>
-        <h5 align="center">
+        <p class="text-center">
           Your pet requires IMMEDIATE action. Please contact the AEC ASAP by phone at
           <strong>1300 232 838</strong> or visit the website below.
-          <a
-            aria-label="AEC Logo"
-            href="https://www.aecvets.com.au/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b-img align="center" src="@/assets/aec-logo.png" alt="AEC Logo"></b-img>
-          </a>
-        </h5>
+        </p>
+        <a
+          aria-label="AEC Logo"
+          href="https://www.aecvets.com.au/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <b-img center fluid src="@/assets/aec-logo.png" alt="AEC Logo"></b-img>
+        </a>
       </b-col>
       <b-col class="my-3" v-if="showNonEmergency">
         <h2 align="center">NON-EMERGENCY</h2>
-        <h5 align="center">
+        <p class="text-center">
           You can contact our Vet Clinic via phone at
-          <strong>(07) 3297 1005</strong> or email us at <strong>helpingpawsvet@yahoo.com.au</strong>
-        </h5>
+          <strong>(07) 3297 1005</strong> or email us at
+          <strong>helpingpawsvet@yahoo.com.au</strong>
+        </p>
       </b-col>
       <div class="col-md-6 mt-5 mx-auto" v-if="formNotSubmitted">
         <h2 class="mb-3 text-center">Emergency Assessment</h2>

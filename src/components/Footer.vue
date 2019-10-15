@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <b-col id="footer-content" class="col-lg-5 col-md-12 col-sm-12 mt-2">
-          <h5 class="purple">Clinic Details</h5>
+          <h5 class="mb-3">Clinic Details</h5>
           <p class="clinic-details">
             <strong>Helping Paws Vet Clinic</strong>
             <br />
@@ -15,7 +15,7 @@
           </p>
         </b-col>
         <b-col class="col-lg-3 col-md-12 col-sm-12 mt-2">
-          <h5 class="title">Clinic Hours</h5>
+          <h5 class="title mb-3">Clinic Hours</h5>
           <p class="hour-details">
             <strong>Mon-Fri:</strong> 8:30am - 5:30pm
             <br />
@@ -23,25 +23,34 @@
           </p>
         </b-col>
         <b-col class="col-lg-3 col-md-12 col-sm-12 mt-2">
-          <h5 class="title">Our Community</h5>
+          <h5 class="title mb-3">Our Community</h5>
           <a
             aria-label="Helping Paws Facebook Page"
             href="https://www.facebook.com/helpingpawsveterinaryclinic/"
             target="_blank"
             rel="noopener noreferrer"
+            class="text-dark"
           >
             <fa-icon class="mr-2" :icon="['fab', 'facebook-square']" />Facebook
           </a>
           <br />
           <a
+            aria-label="Helping Paws Adoption Program Website"
             href="https://www.petrescue.com.au/groups/11227/Helping-Paws-Adoption-Program"
             target="_blank"
             rel="noopener noreferrer"
+            class="text-dark"
           >
             <fa-icon class="mr-2" :icon="['fas', 'dog']" />Helping Paws Adoption Program
           </a>
           <br />
-          <a href="https://lostpetfinders.com.au" target="_blank" rel="noopener noreferrer">
+          <a
+            aria-label="Lost Pet Finders Website"
+            href="https://lostpetfinders.com.au"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-dark"
+          >
             <fa-icon class="mr-2" :icon="['fas', 'paw']" />Lost Pet Finders
           </a>
         </b-col>
