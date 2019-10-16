@@ -32,6 +32,7 @@
             class="text-dark"
           >
             <fa-icon class="mr-2" :icon="['fab', 'facebook-square']" />Facebook
+            <fa-icon class="ml-1 xs" :icon="['fas', 'external-link-alt']" />
           </a>
           <br />
           <a
@@ -41,7 +42,8 @@
             rel="noopener noreferrer"
             class="text-dark"
           >
-            <fa-icon class="mr-2" :icon="['fas', 'dog']" />Helping Paws Adoption Program
+            <fa-icon class="mr-2" :icon="['fas', 'dog']" />Adoption Program
+            <fa-icon class="ml-1 xs" :icon="['fas', 'external-link-alt']" />
           </a>
           <br />
           <a
@@ -52,6 +54,7 @@
             class="text-dark"
           >
             <fa-icon class="mr-2" :icon="['fas', 'paw']" />Lost Pet Finders
+            <fa-icon class="ml-1 xs" :icon="['fas', 'external-link-alt']" />
           </a>
         </b-col>
       </div>
