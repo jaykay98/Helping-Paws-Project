@@ -1,4 +1,6 @@
-# bootstrap-firebase-app
+# Helping Paws Web Application
+
+## Live demo at: https://helping-paws-vet-ec213.firebaseapp.com/
 
 ## Project setup
 ```
